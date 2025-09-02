@@ -1,1 +1,1 @@
-# CS3710
+# This repo is for our CS 3710 group during the Fall 2025 Semester.
