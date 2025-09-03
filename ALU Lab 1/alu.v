@@ -21,7 +21,7 @@
 module alu( A, B, C, Opcode, Flags
     );
 input [15:0] A, B;
-input [7:0] Opcode;
+input [4:0] Opcode;
 output reg [15:0] C;
 output reg [4:0] Flags;
 
@@ -29,32 +29,32 @@ output reg [4:0] Flags;
 
 parameter ADD = 5'b0 0101;
 // parameter ADDI = 8'b0101 0000;
-parameter ADDU = 8'b0000 0110;
+parameter ADDU = 5'b0 0110;
 // parameter ADDUI = 8'b0110 0000;
-parameter ADDC = 8'b0000 0111;
+parameter ADDC = 5'b0 0111;
 // parameter ADDCI = 8'b0111 0000;
-parameter ADDCU = 8'b0000 1111; ////
+parameter ADDCU = 5'b0 1111; ////
 // parameter ADDCUI = 8'1111 0000; ////
 
-parameter SUB = 8'b0000 1001;
+parameter SUB = 5'b0 1001;
 // parameter SUBI = 8'b1001 0000;
 
-parameter CMP = 8'b0000 1011;
+parameter CMP = 5'b0 1011;
 // parameter CMPI = 8'b1011 0000;
 // parameter CMPU = 8'b0100 0000; ////
 
-parameter AND = 8'b0000 0001;
-parameter OR = 8'b0000 0010;
-parameter XOR = 8'b0000 0011;
-parameter NOT = 8'b0000 0100; ////
+parameter AND = 5'b0 0001;
+parameter OR = 5'b0 0010;
+parameter XOR = 5'b0 0011;
+parameter NOT = 5'b0 0100; ////
 
-parameter LSH = 8'b1000 0100;
+parameter LSH = 8'b0 1100;
 // parameter LSHI = 8'b1000 000s;
-parameter RSH = 8'b ; ////
+parameter RSH = 8'b1 0011 ; ////
 // parameter RSHI = 8'b ; ////
-parameter ALSH = 8'b ; ////
-parameter ARSH = 8'b ; ////
-parameter WAIT = 8'b0000 0000;
+// parameter ALSH = 8'b0 1110 ; ////
+parameter ARSH = 8'b1 0111 ; ////
+parameter WAIT = 8'b0 0000;
 
 
 
@@ -161,7 +161,7 @@ begin
 //		end
 		
 	//////////////////
-	SUB OR SUBI:
+	SUB:
 		begin
 			C = A - B;
 			if (C == 16'b0000 0000 0000 0000)
@@ -224,7 +224,7 @@ begin
 					Flags[3] = 1'b0;
 				end
 				
-			Flags[2:1] = 2'b00;
+			Flags[2] = 1'b0;
 			Flags[4] = 1'b0;
 			
 			// C = ?? if I don;t specify, then I'm in trouble.
