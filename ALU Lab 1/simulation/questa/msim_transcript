@@ -24,31 +24,31 @@
 # Copying c:/intelfpga_lite/23.1std/questa_fse/win64/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vlog -vlog01compat -work work +incdir+C:/Users/super/Documents/1\ Classes/2025/03\ Fall/CS\ 3710/ALU\ Lab\ 1 {C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/ALU Lab 1/alu_sample_code.v}
+# vlog -vlog01compat -work work +incdir+C:/Users/super/Documents/1\ Classes/2025/03\ Fall/CS\ 3710/CS3710/ALU\ Lab\ 1 {C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/CS3710/ALU Lab 1/alu_sample_code.v}
 # Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 11:42:08 on Aug 29,2025
-# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/ALU Lab 1" C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/ALU Lab 1/alu_sample_code.v 
+# Start time: 17:58:50 on Sep 02,2025
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/CS3710/ALU Lab 1" C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/CS3710/ALU Lab 1/alu_sample_code.v 
 # -- Compiling module alu_sample_code
 # 
 # Top level modules:
 # 	alu_sample_code
-# End time: 11:42:08 on Aug 29,2025, Elapsed time: 0:00:00
+# End time: 17:58:50 on Sep 02,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-# vlog -vlog01compat -work work +incdir+C:/Users/super/Documents/1\ Classes/2025/03\ Fall/CS\ 3710/ALU\ Lab\ 1 {C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/ALU Lab 1/alutest_sample_code.v}
+# vlog -vlog01compat -work work +incdir+C:/Users/super/Documents/1\ Classes/2025/03\ Fall/CS\ 3710/CS3710/ALU\ Lab\ 1 {C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/CS3710/ALU Lab 1/alutest_sample_code.v}
 # Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 11:42:08 on Aug 29,2025
-# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/ALU Lab 1" C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/ALU Lab 1/alutest_sample_code.v 
+# Start time: 17:58:50 on Sep 02,2025
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/CS3710/ALU Lab 1" C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/CS3710/ALU Lab 1/alutest_sample_code.v 
 # -- Compiling module alutest_sample_code
 # 
 # Top level modules:
 # 	alutest_sample_code
-# End time: 11:42:08 on Aug 29,2025, Elapsed time: 0:00:00
+# End time: 17:58:50 on Sep 02,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L fiftyfivenm_ver -L rtl_work -L work -voptargs="+acc"  alutest_sample_code
 # vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L fiftyfivenm_ver -L rtl_work -L work -voptargs=""+acc"" alutest_sample_code 
-# Start time: 11:42:08 on Aug 29,2025
+# Start time: 17:58:51 on Sep 02,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
 # ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
@@ -63,10 +63,10 @@
 # run -all
 # A: 1111, B: 1110, C:0000, Flags[1:0]: 11, time:                  20
 # ** Note: Data structure takes 10896960 bytes of memory
-#          Process time 0.70 seconds
-#          $finish    : C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/ALU Lab 1/alutest_sample_code.v(75)
+#          Process time 0.67 seconds
+#          $finish    : C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/CS3710/ALU Lab 1/alutest_sample_code.v(75)
 #    Time: 20 ns  Iteration: 0  Instance: /alutest_sample_code
 # 1
-# Break in Module alutest_sample_code at C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/ALU Lab 1/alutest_sample_code.v line 75
-# End time: 11:42:26 on Aug 29,2025, Elapsed time: 0:00:18
+# Break in Module alutest_sample_code at C:/Users/super/Documents/1 Classes/2025/03 Fall/CS 3710/CS3710/ALU Lab 1/alutest_sample_code.v line 75
+# End time: 17:59:19 on Sep 02,2025, Elapsed time: 0:00:28
 # Errors: 0, Warnings: 1
