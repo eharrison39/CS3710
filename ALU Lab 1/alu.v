@@ -18,42 +18,43 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module alu( A, B, C, Opcode, Flags
+module alu( A, B, C, Opcode, Flags, Cin
     );
 input [15:0] A, B;
 input [4:0] Opcode;
+input Cin;
 output reg [15:0] C;
 output reg [4:0] Flags;
 
 
 
-parameter ADD = 5'b0 0101;
+parameter ADD = 5'b0_0101;
 // parameter ADDI = 8'b0101 0000;
-parameter ADDU = 5'b0 0110;
+parameter ADDU = 5'b0_0110;
 // parameter ADDUI = 8'b0110 0000;
-parameter ADDC = 5'b0 0111;
+parameter ADDC = 5'b0_0111;
 // parameter ADDCI = 8'b0111 0000;
-parameter ADDCU = 5'b0 1111; ////
+parameter ADDCU = 5'b0_1111; ////
 // parameter ADDCUI = 8'1111 0000; ////
 
-parameter SUB = 5'b0 1001;
+parameter SUB = 5'b0_1001;
 // parameter SUBI = 8'b1001 0000;
 
-parameter CMP = 5'b0 1011;
+parameter CMP = 5'b0_1011;
 // parameter CMPI = 8'b1011 0000;
 // parameter CMPU = 8'b0100 0000; ////
 
-parameter AND = 5'b0 0001;
-parameter OR = 5'b0 0010;
-parameter XOR = 5'b0 0011;
-parameter NOT = 5'b0 0100; ////
+parameter AND = 5'b0_0001;
+parameter OR = 5'b0_0010;
+parameter XOR = 5'b0_0011;
+parameter NOT = 5'b0_0100; ////
 
-parameter LSH = 8'b0 1100;
+parameter LSH = 8'b0_1100;
 // parameter LSHI = 8'b1000 000s;
-parameter RSH = 8'b1 0011 ; ////
+parameter RSH = 8'b1_0011 ; ////
 // parameter RSHI = 8'b ; ////
 // parameter ALSH = 8'b0 1110 ; ////
-parameter ARSH = 8'b1 0111 ; ////
+parameter ARSH = 8'b1_0111 ; ////
 //parameter WAIT = 8'b0 0000;
 
 
@@ -70,7 +71,7 @@ begin
 //				Flags[1] = 1'b0;
 //			
 //			Flags[0] = 1'b0;
-			Flags[4:0] = 5'b00000;
+			Flags[4:0] = 5'b0_0000;
 		end
 //	ADDUI:
 //		begin
@@ -88,7 +89,7 @@ begin
 		begin
 			{Flags[4], C} = A + B;
 			//C = A + B;
-			if (C == 16'b0000 0000 0000 0000)
+			if (C == 16'b0000_0000_0000_0000)
 				Flags[1] = 1'b1;
 			else
 				Flags[1] = 1'b0;
@@ -122,23 +123,23 @@ begin
 	ADDC:
 		begin
 			//C = A + B + 1'b1;
-			{Flags[4], C} = A + B + 1'b1;
+			{Flags[4], C} = A + B + Cin;
 			
-			if (C == 16'b0000 0000 0000 0000)
+			if (C == 16'b0000_0000_0000_0000)
 				Flags[1] = 1'b1;
 			else
 				Flags[1] = 1'b0;
 				
-//			if( (~A[15] & ~B[15] & C[15]) | (A[15] & B[15] & ~C[15]) )
-//				Flags[2] = 1'b1;
-//			else
-//				Flags[2] = 1'b0;
+			if( (~A[15] & ~B[15] & C[15]) | (A[15] & B[15] & ~C[15]) )
+				Flags[2] = 1'b1;
+			else
+				Flags[2] = 1'b0;
 				
 			Flags[3] = 1'b0; Flags[0] = C[15];
 		end
 	ADDCU:
 		begin
-			C = A + B + 1'b1;
+			C = A + B + Cin;
 //			{Flags[4], C} = A + B + 1'b1;
 //			
 //			if (C == 16'b0000 0000 0000 0000)
@@ -147,7 +148,7 @@ begin
 //				Flags[1] = 1'b0;
 //			
 //			Flags[0] = 1'b0;
-			Flags[4:0] = 5'b00000;
+			Flags[4:0] = 5'b0_0000;
 		end
 //	ADDCUI:
 //		begin
@@ -165,8 +166,9 @@ begin
 	//////////////////
 	SUB:
 		begin
-			{Flags[4], C} = A - B;
-			if (C == 16'b0000 0000 0000 0000)
+			//{Flags[4], C} = A - B;
+			C = A - B;
+			if (C == 16'b0000_0000_0000_0000)
 				Flags[1] = 1'b1;
 			else
 				Flags[1] = 1'b0;
@@ -176,7 +178,7 @@ begin
 			else
 				Flags[2] = 1'b0;
 			
-			Flags[3] = 1'b0; Flags[0] = C[15];
+			Flags[4:3] = 2'b00; Flags[0] = C[15];
 		end
 		
 //	SUBI:
@@ -197,11 +199,11 @@ begin
 	//////////////////
 	CMP:
 		begin
+			Flags = 5'b00000;
 			if(A == B)
-				Flags[1] = 1'b1
-			else begin
-				Flags[1] = 1'b0
-				
+				Flags[1] = 1'b1;
+			else
+				Flags[1] = 1'b0;
 			//C = 16'b0000 0000 0000 0000;
 			//Flags[4:2] = 3'b000;
 			
@@ -230,7 +232,7 @@ begin
 			Flags[4] = 1'b0;
 			
 			// C = ?? if I don;t specify, then I'm in trouble.
-			C = 16'b0000 0000 0000 0000;
+			C = 16'b0000_0000_0000_0000;
 			
 		end
 //	CMPI:
@@ -246,24 +248,29 @@ begin
 	AND:
 		begin
 			C = A & B;
+			Flags = 5'b0_0000;
 		end
 	OR:
 		begin
 			C = A | B;
+			Flags = 5'b0_0000;
 		end
 	XOR:
 		begin
 			C = A ^ B;
+			Flags = 5'b0_0000;
 		end
 	NOT:
 		begin
 			C = ~A;
+			Flags = 5'b0_0000;
 		end
 		
 	//////////////////
 	LSH:
 		begin
-			C = A << B
+			C = A << B;
+			Flags = 5'b0_0000;
 		end
 //	LSHI:
 //		begin
@@ -271,7 +278,8 @@ begin
 //		end
 	RSH:
 		begin
-			C = A >> B
+			C = A >> B;
+			Flags = 5'b0_0000;
 		end
 //	RSHI:
 //		begin
@@ -283,7 +291,8 @@ begin
 //		end
 	ARSH:
 		begin
-			C = $signed(A) >>> B
+			C = $signed(A) >>> B;
+			Flags = 5'b0_0000;
 		end
 //	WAIT:
 //		begin
@@ -292,8 +301,8 @@ begin
 		
 	default: 
 		begin
-			C = 16'b0000 0000 0000 0000;
-			Flags = 5'b0000 0;
+			C = 16'b0000_0000_0000_0000;
+			Flags = 5'b0_0000;
 		end
 	endcase
 end
