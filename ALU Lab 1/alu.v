@@ -54,9 +54,7 @@ parameter RSH = 8'b1 0011 ; ////
 // parameter RSHI = 8'b ; ////
 // parameter ALSH = 8'b0 1110 ; ////
 parameter ARSH = 8'b1 0111 ; ////
-parameter WAIT = 8'b0 0000;
-
-
+//parameter WAIT = 8'b0 0000;
 
 
 always @(A, B, Opcode)
@@ -94,13 +92,17 @@ begin
 				Flags[1] = 1'b1;
 			else
 				Flags[1] = 1'b0;
+//			if(A == B)
+//				Flags[1] = 1'b1;
+//			else
+//				Flags[1] = 1'b0;
 				
 			if( (~A[15] & ~B[15] & C[15]) | (A[15] & B[15] & ~C[15]) )
 				Flags[2] = 1'b1;
 			else
 				Flags[2] = 1'b0;
 				
-			Flags[3] = 1'b0; Flags[0] = 1'b0;
+			Flags[3] = 1'b0; Flags[0] = C[15];
 		end
 //	ADDI:
 //		begin
@@ -132,7 +134,7 @@ begin
 //			else
 //				Flags[2] = 1'b0;
 				
-			Flags[3] = 1'b0; Flags[0] = 1'b0;
+			Flags[3] = 1'b0; Flags[0] = C[15];
 		end
 	ADDCU:
 		begin
@@ -163,7 +165,7 @@ begin
 	//////////////////
 	SUB:
 		begin
-			C = A - B;
+			{Flags[4], C} = A - B;
 			if (C == 16'b0000 0000 0000 0000)
 				Flags[1] = 1'b1;
 			else
@@ -174,7 +176,7 @@ begin
 			else
 				Flags[2] = 1'b0;
 			
-			Flags[4:3] = 2'b00; Flags[0] = 1'b0;
+			Flags[3] = 1'b0; Flags[0] = C[15];
 		end
 		
 //	SUBI:
@@ -261,7 +263,7 @@ begin
 	//////////////////
 	LSH:
 		begin
-		
+			C = A << B
 		end
 //	LSHI:
 //		begin
@@ -269,24 +271,24 @@ begin
 //		end
 	RSH:
 		begin
-		
+			C = A >> B
 		end
 //	RSHI:
 //		begin
 //		
 //		end
-	ALSH:
-		begin
-		
-		end
+//	ALSH:
+//		begin
+//		
+//		end
 	ARSH:
 		begin
-		
+			C = $signed(A) >>> B
 		end
-	WAIT:
-		begin
-		
-		end
+//	WAIT:
+//		begin
+//			
+//		end
 		
 	default: 
 		begin
