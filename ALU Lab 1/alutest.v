@@ -52,7 +52,7 @@ module alutest;
 //signal in the argument list.
 
 		// Add
-
+		cin = 0;
 		opcode = 5'b00101;
 		a = 16'h0000;
 		b = 16'h0000;
@@ -61,11 +61,11 @@ module alutest;
 		
 		if(c == 16'h0000 && flags == 5'b00010)
 		begin
-			$display("Add 1 of 2 is chillin. End result which should be 0 is %h.", c);
+			$display("Add 1 of 5 is chillin.");
 		end
 		else
 		begin
-			$display("Add 1 of 2 is not chillin.");
+			$display("Add 1 of 5 is not chillin.");
 		end
 		
 		
@@ -76,11 +76,11 @@ module alutest;
 		
 		if(c == 16'h1727 && flags == 5'b00000)
 		begin
-			$display("Add 2 of 2 is chillin.");
+			$display("Add 2 of 5 is chillin.");
 		end
 		else
 		begin
-			$display("Add 2 of 2 is not chillin.");
+			$display("Add 2 of 5 is not chillin.");
 		end
 		
 		
@@ -91,11 +91,11 @@ module alutest;
 		
 		if(c == 16'hf727 && flags == 5'b00001)
 		begin
-			$display("Add 3 of 2 is chillin.");
+			$display("Add 3 of 5 is chillin.");
 		end
 		else
 		begin
-			$display("Add 3 of 2 is not chillin.");
+			$display("Add 3 of 5 is not chillin.");
 		end
 		
 		
@@ -104,17 +104,411 @@ module alutest;
 		
 		#10
 		
-		if(c == 16'h0401 && flags == 5'b10000)  // Verify these flags. ////////////////////////////////////////////////////////////////////////
+		if(c == 16'h0401 && flags == 5'b10000)
 		begin
-			$display("Add 4 of 2 is chillin.");
+			$display("Add 4 of 5 is chillin.");
 		end
 		else
 		begin
-			$display("Add 4 of 2 is not chillin.  Should be 0401 and it is %h.  Flags should be 10100 but is %b", c, flags);
+			$display("Add 4 of 5 is not chillin.  Should be 0401 and it is %h.  Flags should be 10100 but is %b", c, flags);
 		end
 		
-		// Should polly do a test that sets the carry and overflow flags.  //////////////////////////////////////////////////////////////////////////
-		// Should also test addc and addcu
+		
+		a = 16'h7fff;
+		b = 16'h0001;
+		
+		#10
+		
+		if(c == 16'h8000 && flags == 5'b00101)
+		begin
+			$display("Add 5 of 5 is chillin.");
+		end
+		else
+		begin
+			$display("Add 5 of 5 is not chillin.  Should be 8000 and it is %h.  Flags should be 00101 but is %b", c, flags);
+		end
+
+		// Addu
+
+		opcode = 5'b00110;
+		a = 16'h0000;
+		b = 16'h0000;
+		
+		#10
+		
+		if(c == 16'h0000 && flags == 5'b00000)
+		begin
+			$display("Addu 1 of 5 is chillin.");
+		end
+		else
+		begin
+			$display("Addu 1 of 5 is not chillin.");
+		end
+		
+		
+		a = 16'h0402;
+		b = 16'h1325;
+		
+		#10
+		
+		if(c == 16'h1727 && flags == 5'b00000)
+		begin
+			$display("Addu 2 of 5 is chillin.");
+		end
+		else
+		begin
+			$display("Addu 2 of 5 is not chillin.");
+		end
+		
+		
+		a = 16'h0402;
+		b = 16'hf325;
+		
+		#10
+		
+		if(c == 16'hf727 && flags == 5'b00000)
+		begin
+			$display("Addu 3 of 5 is chillin.");
+		end
+		else
+		begin
+			$display("Addu 3 of 5 is not chillin.");
+		end
+		
+		
+		a = 16'h0402;
+		b = 16'hffff;
+		
+		#10
+		
+		if(c == 16'h0401 && flags == 5'b00000)
+		begin
+			$display("Addu 4 of 5 is chillin.");
+		end
+		else
+		begin
+			$display("Addu 4 of 5 is not chillin.  Should be 0401 and it is %h.  Flags should be 00000 but is %b", c, flags);
+		end
+		
+		
+		a = 16'h7fff;
+		b = 16'h0001;
+		
+		#10
+		
+		if(c == 16'h8000 && flags == 5'b00000)
+		begin
+			$display("Addu 5 of 5 is chillin.");
+		end
+		else
+		begin
+			$display("Addu 5 of 5 is not chillin.  Should be 8000 and it is %h.  Flags should be 00000 but is %b", c, flags);
+		end
+
+		// Addc
+
+		opcode = 5'b00111;
+		a = 16'h0000;
+		b = 16'h0000;
+		
+		#10
+		
+		if(c == 16'h0000 && flags == 5'b00010)
+		begin
+			$display("Addc 1 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addc 1 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0402;
+		b = 16'h1325;
+		
+		#10
+		
+		if(c == 16'h1727 && flags == 5'b00000)
+		begin
+			$display("Addc 2 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addc 2 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0402;
+		b = 16'hf325;
+		
+		#10
+		
+		if(c == 16'hf727 && flags == 5'b00001)
+		begin
+			$display("Addc 3 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addc 3 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0402;
+		b = 16'hffff;
+		
+		#10
+		
+		if(c == 16'h0401 && flags == 5'b10000)
+		begin
+			$display("Addc 4 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addc 4 of 10 is not chillin.  Should be 0401 and it is %h.  Flags should be 10100 but is %b", c, flags);
+		end
+		
+		
+		a = 16'h7fff;
+		b = 16'h0001;
+		
+		#10
+		
+		if(c == 16'h8000 && flags == 5'b00101)
+		begin
+			$display("Addc 5 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addc 5 of 10 is not chillin.  Should be 8000 and it is %h.  Flags should be 00101 but is %b.", c, flags);
+		end
+		
+		cin = 1;
+		a = 16'h0000;
+		b = 16'hffff;
+		
+		#10
+		
+		if(c == 16'h0000 && flags == 5'b10010)
+		begin
+			$display("Addc 6 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addc 6 of 10 is not chillin.  Should be 0000 and it is %h.  Flags should be 00010 but is %b.", c, flags);
+		end
+		
+		
+		a = 16'h0401;
+		b = 16'h1325;
+		
+		#10
+		
+		if(c == 16'h1727 && flags == 5'b00000)
+		begin
+			$display("Addc 7 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addc 7 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0401;
+		b = 16'hf325;
+		
+		#10
+		
+		if(c == 16'hf727 && flags == 5'b00001)
+		begin
+			$display("Addc 8 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addc 8 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0401;
+		b = 16'hffff;
+		
+		#10
+		
+		if(c == 16'h0401 && flags == 5'b10000)
+		begin
+			$display("Addc 9 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addc 9 of 10 is not chillin.  Should be 0401 and it is %h.  Flags should be 10100 but is %b", c, flags);
+		end
+		
+		
+		a = 16'h7ffe;
+		b = 16'h0001;
+		
+		#10
+		
+		if(c == 16'h8000 && flags == 5'b00101)
+		begin
+			$display("Addc 10 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addc 10 of 10 is not chillin.  Should be 8000 and it is %h.  Flags should be 00101 but is %b", c, flags);
+		end
+
+		// Addcu
+		
+		cin = 0;
+		opcode = 5'b01111;
+		a = 16'h0000;
+		b = 16'h0000;
+		
+		#10
+		
+		if(c == 16'h0000 && flags == 5'b00000)
+		begin
+			$display("Addcu 1 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addcu 1 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0402;
+		b = 16'h1325;
+		
+		#10
+		
+		if(c == 16'h1727 && flags == 5'b00000)
+		begin
+			$display("Addcu 2 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addcu 2 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0402;
+		b = 16'hf325;
+		
+		#10
+		
+		if(c == 16'hf727 && flags == 5'b00000)
+		begin
+			$display("Addcu 3 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addcu 3 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0402;
+		b = 16'hffff;
+		
+		#10
+		
+		if(c == 16'h0401 && flags == 5'b00000)
+		begin
+			$display("Addcu 4 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addcu 4 of 10 is not chillin.  Should be 0401 and it is %h.  Flags should be 00000 but is %b", c, flags);
+		end
+		
+		
+		a = 16'h7fff;
+		b = 16'h0001;
+		
+		#10
+		
+		if(c == 16'h8000 && flags == 5'b00000)
+		begin
+			$display("Addcu 5 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addcu 5 of 10 is not chillin.  Should be 8000 and it is %h.  Flags should be 00000 but is %b", c, flags);
+		end
+
+		cin = 1;
+		a = 16'h0000;
+		b = 16'hffff;
+		
+		#10
+		
+		if(c == 16'h0000 && flags == 5'b00000)
+		begin
+			$display("Addcu 6 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addcu 6 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0401;
+		b = 16'h1325;
+		
+		#10
+		
+		if(c == 16'h1727 && flags == 5'b00000)
+		begin
+			$display("Addcu 7 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addcu 7 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0401;
+		b = 16'hf325;
+		
+		#10
+		
+		if(c == 16'hf727 && flags == 5'b00000)
+		begin
+			$display("Addcu 8 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addcu 8 of 10 is not chillin.");
+		end
+		
+		
+		a = 16'h0401;
+		b = 16'hffff;
+		
+		#10
+		
+		if(c == 16'h0401 && flags == 5'b00000)
+		begin
+			$display("Addcu 9 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addcu 9 of 10 is not chillin.  Should be 0401 and it is %h.  Flags should be 00000 but is %b", c, flags);
+		end
+		
+		
+		a = 16'h7ffe;
+		b = 16'h0001;
+		
+		#10
+		
+		if(c == 16'h8000 && flags == 5'b00000)
+		begin
+			$display("Addcu 10 of 10 is chillin.");
+		end
+		else
+		begin
+			$display("Addcu 10 of 10 is not chillin.  Should be 8000 and it is %h.  Flags should be 00000 but is %b", c, flags);
+		end
 		
 		// Sub
 		
@@ -126,11 +520,11 @@ module alutest;
 		
 		if(c == 16'h2444 && flags == 5'b00000)
 		begin
-			$display("Sub 1 of 1 is chillin.  Should be 2444 and it is %h.", c);
+			$display("Sub 1 of 6 is chillin.");
 		end
 		else
 		begin
-			$display("Sub 1 of 1 is not chillin.  Should be 2444 and it is %h.", c);
+			$display("Sub 1 of 6 is not chillin.  Should be 2444 and it is %h.", c);
 		end
 		
 		
@@ -141,11 +535,11 @@ module alutest;
 		
 		if(c == 16'h0001 && flags == 5'b00000)
 		begin
-			$display("Sub 2 of 2 is chillin.  Should be 0001 and it is %h.", c);
+			$display("Sub 2 of 6 is chillin.");
 		end
 		else
 		begin
-			$display("Sub 2 of 2 is not chillin.  Should be 0001 and it is %h.", c);
+			$display("Sub 2 of 6 is not chillin.  Should be 0001 and it is %h.", c);
 		end
 		
 		
@@ -156,14 +550,12 @@ module alutest;
 		
 		if(c == 16'h4444 && flags == 5'b00100)
 		begin
-			$display("Sub 3 of 3 is chillin.");
+			$display("Sub 3 of 6 is chillin.");
 		end
 		else
 		begin
-			$display("Sub 3 of 3 is not chillin.  Maybe should be 4444 and it is %h.  Flags should be 00100 but is %b.", c, flags);
+			$display("Sub 3 of 6 is not chillin.  Maybe should be 4444 and it is %h.  Flags should be 00100 but is %b.", c, flags);
 		end
-		
-		$display("TEZZZZZZZZZZZZ: %b", 4'b1001 - 4'b0101);
 		
 		
 		a = 16'h7335;
@@ -173,11 +565,11 @@ module alutest;
 		
 		if(c == 16'h0000 && flags == 5'b00010)
 		begin
-			$display("Sub 4 of 3 is chillin.");
+			$display("Sub 4 of 6 is chillin.");
 		end
 		else
 		begin
-			$display("Sub 4 of 3 is not chillin.  Should be 0000 and it is %h.", c);
+			$display("Sub 4 of 6 is not chillin.  Should be 0000 and it is %h.", c);
 		end
 		
 		
@@ -188,11 +580,11 @@ module alutest;
 		
 		if(c == 16'hffff && flags == 5'b00001)
 		begin
-			$display("Sub 5 of 3 is chillin.");
+			$display("Sub 5 of 6 is chillin.");
 		end
 		else
 		begin
-			$display("Sub 5 of 3 is not chillin.  Should be ffff and it is %h.  Flags should be 00001 but is %b", c, flags);
+			$display("Sub 5 of 6 is not chillin.  Should be ffff and it is %h.  Flags should be 00001 but is %b", c, flags);
 		end
 		
 		
@@ -203,14 +595,12 @@ module alutest;
 		
 		if(c == 16'h8001 && flags == 5'b00101)
 		begin
-			$display("Sub 6 of 3 is chillin.");
+			$display("Sub 6 of 6 is chillin.");
 		end
 		else
 		begin
-			$display("Sub 6 of 3 is not chillin.  Should be 8001 and it is %h. Flags should be 00100 but are %b.", c, flags);
+			$display("Sub 6 of 6 is not chillin.  Should be 8001 and it is %h. Flags should be 00100 but are %b.", c, flags);
 		end
-		
-		// Should also test overflow flag.  ////////////////////////////////////////////////////////
 		
 		// Cmp
 		
@@ -222,11 +612,11 @@ module alutest;
 		
 		if(c == 16'h0000 && flags == 5'b00000)
 		begin
-			$display("Cmp 1 of 1 is chilin.");
+			$display("Cmp 1 of 5 is chilin.");
 		end
 		else
 		begin
-			$display("Cmp 1 of 1 is not chilin.");
+			$display("Cmp 1 of 5 is not chilin.");
 		end
 		
 		
@@ -237,11 +627,11 @@ module alutest;
 		
 		if(c == 16'h0000 && flags == 5'b00010)
 		begin
-			$display("Cmp 2 of 1 is chilin.");
+			$display("Cmp 2 of 5 is chilin.");
 		end
 		else
 		begin
-			$display("Cmp 2 of 1 is not chilin.");
+			$display("Cmp 2 of 5 is not chilin.");
 		end
 		
 		
@@ -252,11 +642,11 @@ module alutest;
 		
 		if(c == 16'h0000 && flags == 5'b00001)
 		begin
-			$display("Cmp 3 of 1 is chilin.");
+			$display("Cmp 3 of 5 is chilin.");
 		end
 		else
 		begin
-			$display("Cmp 3 of 1 is not chilin.  Flags is %b but should be 00001.", flags);
+			$display("Cmp 3 of 5 is not chilin.  Flags is %b but should be 00001.", flags);
 		end
 		
 		
@@ -267,11 +657,11 @@ module alutest;
 		
 		if(c == 16'h0000 && flags == 5'b01000)
 		begin
-			$display("Cmp 4 of 1 is chilin.");
+			$display("Cmp 4 of 5 is chilin.");
 		end
 		else
 		begin
-			$display("Cmp 4 of 1 is not chilin.  Flags is %b but should be 01000.", flags);
+			$display("Cmp 4 of 5 is not chilin.  Flags is %b but should be 01000.", flags);
 		end
 		
 		
@@ -282,16 +672,16 @@ module alutest;
 		
 		if(c == 16'h0000 && flags == 5'b01001)
 		begin
-			$display("Cmp 5 of 1 is chilin.");
+			$display("Cmp 5 of 5 is chilin.");
 		end
 		else
 		begin
-			$display("Cmp 5 of 1 is not chilin.");
+			$display("Cmp 5 of 5 is not chilin.");
 		end
 		
-		// Zero flag is set if they are the same
-		// L is set if unsigned a less than b
-		// N is set if signed a is less than b
+		// Zero flag is set if they are the same 	// Tested
+		// L is set if unsigned a less than b		// Tested
+		// N is set if signed a is less than b		// Tested
 		
 		// And
 		
@@ -412,11 +802,11 @@ module alutest;
 		
 		if(c == 16'hf0f0 && flags == 5'b00000)
 		begin
-			$display("Not 1 of 2 is chillin.");
+			$display("Not 2 of 2 is chillin.");
 		end
 		else
 		begin
-			$display("Not 1 of 2 is not chillin.");
+			$display("Not 2 of 2 is not chillin.");
 		end
 		
 		// Lsh

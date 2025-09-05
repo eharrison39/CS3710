@@ -58,7 +58,7 @@ parameter ARSH = 8'b1_0111 ; ////
 //parameter WAIT = 8'b0 0000;
 
 
-always @(A, B, Opcode)
+always @(A, B, Opcode, Cin)
 begin
 	case (Opcode)
 	ADDU:
