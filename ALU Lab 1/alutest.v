@@ -104,13 +104,13 @@ module alutest;
 		
 		#10
 		
-		if(c == 16'h0401 && flags == 5'b10100)  // Verify these flags. ////////////////////////////////////////////////////////////////////////
+		if(c == 16'h0401 && flags == 5'b10000)  // Verify these flags. ////////////////////////////////////////////////////////////////////////
 		begin
 			$display("Add 4 of 2 is chillin.");
 		end
 		else
 		begin
-			$display("Add 4 of 2 is not chillin.");
+			$display("Add 4 of 2 is not chillin.  Should be 0401 and it is %h.  Flags should be 10100 but is %b", c, flags);
 		end
 		
 		// Should polly do a test that sets the carry and overflow flags.  //////////////////////////////////////////////////////////////////////////
@@ -154,13 +154,13 @@ module alutest;
 		
 		#10
 		
-		if(c == 16'h4444 && flags == 5'b00000)
+		if(c == 16'h4444 && flags == 5'b00100)
 		begin
-			$display("Sub 3 of 3 is chillin.  Maybe should be 4444 and it is %h.", c);
+			$display("Sub 3 of 3 is chillin.");
 		end
 		else
 		begin
-			$display("Sub 3 of 3 is not chillin.  Maybe should be 4444 and it is %h.", c);
+			$display("Sub 3 of 3 is not chillin.  Maybe should be 4444 and it is %h.  Flags should be 00100 but is %b.", c, flags);
 		end
 		
 		$display("TEZZZZZZZZZZZZ: %b", 4'b1001 - 4'b0101);
@@ -173,11 +173,11 @@ module alutest;
 		
 		if(c == 16'h0000 && flags == 5'b00010)
 		begin
-			$display("Sub 4 of 3 is chillin.  Maybe should be 4444 and it is %h.", c);
+			$display("Sub 4 of 3 is chillin.");
 		end
 		else
 		begin
-			$display("Sub 4 of 3 is not chillin.  Maybe should be 4444 and it is %h.", c);
+			$display("Sub 4 of 3 is not chillin.  Should be 0000 and it is %h.", c);
 		end
 		
 		
@@ -188,11 +188,11 @@ module alutest;
 		
 		if(c == 16'hffff && flags == 5'b00001)
 		begin
-			$display("Sub 5 of 3 is chillin.  Maybe should be 4444 and it is %h.", c);
+			$display("Sub 5 of 3 is chillin.");
 		end
 		else
 		begin
-			$display("Sub 5 of 3 is not chillin.  Maybe should be 4444 and it is %h.", c);
+			$display("Sub 5 of 3 is not chillin.  Should be ffff and it is %h.  Flags should be 00001 but is %b", c, flags);
 		end
 		
 		
@@ -201,13 +201,13 @@ module alutest;
 		
 		#10
 		
-		if(c == 16'h4444 && flags == 5'b00100)
+		if(c == 16'h8001 && flags == 5'b00101)
 		begin
-			$display("Sub 6 of 3 is chillin.  Maybe should be 4444 and it is %h.", c);
+			$display("Sub 6 of 3 is chillin.");
 		end
 		else
 		begin
-			$display("Sub 6 of 3 is not chillin.  Maybe should be 4444 and it is %h.", c);
+			$display("Sub 6 of 3 is not chillin.  Should be 8001 and it is %h. Flags should be 00100 but are %b.", c, flags);
 		end
 		
 		// Should also test overflow flag.  ////////////////////////////////////////////////////////
@@ -256,7 +256,7 @@ module alutest;
 		end
 		else
 		begin
-			$display("Cmp 3 of 1 is not chilin.");
+			$display("Cmp 3 of 1 is not chilin.  Flags is %b but should be 00001.", flags);
 		end
 		
 		
@@ -271,7 +271,7 @@ module alutest;
 		end
 		else
 		begin
-			$display("Cmp 4 of 1 is not chilin.");
+			$display("Cmp 4 of 1 is not chilin.  Flags is %b but should be 01000.", flags);
 		end
 		
 		
@@ -291,7 +291,7 @@ module alutest;
 		
 		// Zero flag is set if they are the same
 		// L is set if unsigned a less than b
-		// N is set if a is less than b
+		// N is set if signed a is less than b
 		
 		// And
 		

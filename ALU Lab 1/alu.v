@@ -173,7 +173,7 @@ begin
 			else
 				Flags[1] = 1'b0;
 				
-			if( (~A[15] & ~B[15] & C[15]) | (A[15] & B[15] & ~C[15]) )
+			if( (A[15] ^ B[15]) & (A[15] ^ C[15]) )
 				Flags[2] = 1'b1;
 			else
 				Flags[2] = 1'b0;
@@ -199,34 +199,45 @@ begin
 	//////////////////
 	CMP:
 		begin
-			Flags = 5'b00000;
+			//Flags = 5'b00000;
 			if(A == B)
 				Flags[1] = 1'b1;
 			else
 				Flags[1] = 1'b0;
+				
+			if( $signed(A) < $signed(B) ) 
+				Flags[0] = 1'b1;
+			else 
+				Flags[0] = 1'b0;
+		
+			Flags[3] = (A < B);
 			//C = 16'b0000 0000 0000 0000;
 			//Flags[4:2] = 3'b000;
 			
+			
+			
 			// both positive or both negative 
-			if( A[15] == B[15] ) begin
-				if (A < B) begin
-					Flags[0] = 1'b1;
-					Flags[3] = 1'b1;
-				end
-				else begin
-					Flags[0] = 1'b0;
-					Flags[3] = 1'b0;
-				end
-			end
-			else if (A[15] == 1'b0)
-				if (A < B) begin
-					Flags[0] = 1'b1;
-					Flags[3] = 1'b1;
-				end
-				else begin
-					Flags[0] = 1'b0;
-					Flags[3] = 1'b0;
-				end
+//			if( A[15] == B[15] ) begin
+//				if (A < B) begin
+//					Flags[0] = 1'b1;
+//					Flags[3] = 1'b1;
+//				end
+//				else begin
+//					Flags[0] = 1'b0;
+//					Flags[3] = 1'b0;
+//				end
+//			end
+//			else if (A[15] == 1'b0)
+//				if (A < B) begin
+//					Flags[0] = 1'b1;
+//					Flags[3] = 1'b1;
+//				end
+//				
+//		// N is set if signed a is less than b
+//				else begin
+//					Flags[0] = 1'b0;
+//					Flags[3] = 1'b0;
+//				end
 				
 			Flags[2] = 1'b0;
 			Flags[4] = 1'b0;
