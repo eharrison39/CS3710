@@ -166,8 +166,12 @@ begin
 	//////////////////
 	SUB:
 		begin
+<<<<<<< HEAD
 			//{Flags[4], C} = A - B;
 			C = A - B;
+=======
+			{Flags[4], C} = A - B;
+>>>>>>> 7df1e42 (Fixed syntax errors)
 			if (C == 16'b0000_0000_0000_0000)
 				Flags[1] = 1'b1;
 			else
@@ -199,11 +203,16 @@ begin
 	//////////////////
 	CMP:
 		begin
+<<<<<<< HEAD
 			//Flags = 5'b00000;
+=======
+			Flags = 5'b00000;
+>>>>>>> 7df1e42 (Fixed syntax errors)
 			if(A == B)
 				Flags[1] = 1'b1;
 			else
 				Flags[1] = 1'b0;
+<<<<<<< HEAD
 				
 			if( $signed(A) < $signed(B) ) 
 				Flags[0] = 1'b1;
@@ -211,6 +220,8 @@ begin
 				Flags[0] = 1'b0;
 		
 			Flags[3] = (A < B);
+=======
+>>>>>>> 7df1e42 (Fixed syntax errors)
 			//C = 16'b0000 0000 0000 0000;
 			//Flags[4:2] = 3'b000;
 			
