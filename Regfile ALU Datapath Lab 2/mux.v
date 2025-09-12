@@ -5,11 +5,11 @@
 // 
 module mux (r, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, out);
 	
-	input [3:0] rs;
+	input [3:0] r;
 	input [15:0] r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15;
 	output reg[15:0] out;
 	
-always @(r)
+always @(r, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15)
 begin
 	case (r)
 	
@@ -91,5 +91,8 @@ begin
 	4'b1111:
 		begin
 			out = r15;
-		end		
+		end
+	endcase
 end
+
+endmodule
