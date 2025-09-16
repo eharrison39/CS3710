@@ -8,3 +8,12 @@ c5_pin_model_dump.txt
 *.qsf
 *.qws
 *.pdf
+*.bak
+*.rpt
+*.done
+*.smsg
+*.jdi
+*.summary
+*.pin
+*.sld
+*.sof
