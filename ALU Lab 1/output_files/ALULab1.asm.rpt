@@ -1,6 +1,6 @@
 Assembler report for ALULab1
-Thu Sep 04 10:59:12 2025
-Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Thu Sep  4 18:37:37 2025
+Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
 ---------------------
@@ -10,7 +10,7 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Users/umyea/repos/CS3710/ALU Lab 1/output_files/ALULab1.sof
+  5. Assembler Device Options: C:/Users/Asus/Documents/School/Fall 2025/CS 3710/CS3710/ALU Lab 1/output_files/ALULab1.sof
   6. Assembler Messages
 
 
@@ -18,7 +18,7 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 2020  Intel Corporation. All rights reserved.
+Copyright (C) 2024  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
 and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
@@ -38,11 +38,11 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Sep 04 10:59:12 2025 ;
+; Assembler Status      ; Successful - Thu Sep  4 18:37:37 2025 ;
 ; Revision Name         ; ALULab1                               ;
-; Top-level Entity Name ; alu_sample_code                       ;
-; Family                ; MAX 10                                ;
-; Device                ; 10M50DAF484C7G                        ;
+; Top-level Entity Name ; cpu                                   ;
+; Family                ; Cyclone V                             ;
+; Device                ; 5CSEMA5F31C6                          ;
 +-----------------------+---------------------------------------+
 
 
@@ -53,23 +53,23 @@ https://fpgasoftware.intel.com/eula.
 +--------+---------+---------------+
 
 
-+----------------------------------------------------------------+
-; Assembler Generated Files                                      ;
-+----------------------------------------------------------------+
-; File Name                                                      ;
-+----------------------------------------------------------------+
-; C:/Users/umyea/repos/CS3710/ALU Lab 1/output_files/ALULab1.sof ;
-+----------------------------------------------------------------+
++--------------------------------------------------------------------------------------------+
+; Assembler Generated Files                                                                  ;
++--------------------------------------------------------------------------------------------+
+; File Name                                                                                  ;
++--------------------------------------------------------------------------------------------+
+; C:/Users/Asus/Documents/School/Fall 2025/CS 3710/CS3710/ALU Lab 1/output_files/ALULab1.sof ;
++--------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/umyea/repos/CS3710/ALU Lab 1/output_files/ALULab1.sof ;
-+----------------+-------------------------------------------------------------------------+
-; Option         ; Setting                                                                 ;
-+----------------+-------------------------------------------------------------------------+
-; JTAG usercode  ; 0x0027414D                                                              ;
-; Checksum       ; 0x0027414D                                                              ;
-+----------------+-------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/Asus/Documents/School/Fall 2025/CS 3710/CS3710/ALU Lab 1/output_files/ALULab1.sof ;
++----------------+-----------------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                             ;
++----------------+-----------------------------------------------------------------------------------------------------+
+; JTAG usercode  ; 0x00B14118                                                                                          ;
+; Checksum       ; 0x00B14118                                                                                          ;
++----------------+-----------------------------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -77,16 +77,15 @@ https://fpgasoftware.intel.com/eula.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
-    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Thu Sep 04 10:59:08 2025
+    Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+    Info: Processing started: Thu Sep  4 18:37:32 2025
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off ALULab1 -c ALULab1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4698 megabytes
-    Info: Processing ended: Thu Sep 04 10:59:12 2025
-    Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:04
+    Info: Peak virtual memory: 4865 megabytes
+    Info: Processing ended: Thu Sep  4 18:37:37 2025
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:05
 
 

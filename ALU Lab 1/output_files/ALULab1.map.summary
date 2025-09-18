@@ -1,16 +1,17 @@
-Analysis & Synthesis Status : Successful - Thu Sep 04 10:58:46 2025
-Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Analysis & Synthesis Status : Successful - Thu Sep  4 18:36:54 2025
+Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : ALULab1
-Top-level Entity Name : alu_sample_code
-Family : MAX 10
-Total logic elements : 24
-    Total combinational functions : 24
-    Dedicated logic registers : 0
-Total registers : 0
-Total pins : 19
+Top-level Entity Name : cpu
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 6
+Total pins : 23
 Total virtual pins : 0
-Total memory bits : 0
-Embedded Multiplier 9-bit elements : 0
+Total block memory bits : 0
+Total DSP Blocks : 0
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
 Total PLLs : 0
-UFM blocks : 0
-ADC blocks : 0
+Total DLLs : 0

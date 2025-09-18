@@ -4,79 +4,87 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "C[0]",
+					"name" : "flags[0]",
 					"strict" : false
 				},
 				{
-					"name" : "C[1]",
+					"name" : "flags[1]",
 					"strict" : false
 				},
 				{
-					"name" : "C[2]",
+					"name" : "flags[3]",
 					"strict" : false
 				},
 				{
-					"name" : "C[3]",
+					"name" : "c[0]",
 					"strict" : false
 				},
 				{
-					"name" : "Flags[0]",
+					"name" : "c[1]",
 					"strict" : false
 				},
 				{
-					"name" : "Flags[1]",
+					"name" : "c[2]",
 					"strict" : false
 				},
 				{
-					"name" : "Flags[2]",
+					"name" : "c[3]",
 					"strict" : false
 				},
 				{
-					"name" : "Flags[3]",
+					"name" : "a[1]",
 					"strict" : false
 				},
 				{
-					"name" : "Flags[4]",
+					"name" : "b[1]",
 					"strict" : false
 				},
 				{
-					"name" : "B[0]",
+					"name" : "a[0]",
 					"strict" : false
 				},
 				{
-					"name" : "A[0]",
+					"name" : "b[0]",
 					"strict" : false
 				},
 				{
-					"name" : "Opcode[1]",
+					"name" : "a[3]",
 					"strict" : false
 				},
 				{
-					"name" : "Opcode[0]",
+					"name" : "b[3]",
 					"strict" : false
 				},
 				{
-					"name" : "B[1]",
+					"name" : "a[2]",
 					"strict" : false
 				},
 				{
-					"name" : "A[1]",
+					"name" : "b[2]",
 					"strict" : false
 				},
 				{
-					"name" : "B[2]",
+					"name" : "k3",
 					"strict" : false
 				},
 				{
-					"name" : "A[2]",
+					"name" : "sw1",
 					"strict" : false
 				},
 				{
-					"name" : "B[3]",
+					"name" : "sw0",
 					"strict" : false
 				},
 				{
-					"name" : "A[3]",
+					"name" : "k2",
+					"strict" : false
+				},
+				{
+					"name" : "k0",
+					"strict" : false
+				},
+				{
+					"name" : "k1",
 					"strict" : false
 				}
 			]
