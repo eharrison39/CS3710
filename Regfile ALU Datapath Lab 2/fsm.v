@@ -61,7 +61,7 @@ module fsm(clk, rst, rs, rd, opcode, re, ri, fe, inop);
 					
 				// Set alu opcode
 				if(inop[15:12] == 4'h0)
-					opcode = 0 & inop[7:4];
+					opcode = {1'b0, inop[7:4]};
 				else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0100)
 					opcode = 5'b11100;
 				else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0000)
@@ -71,7 +71,7 @@ module fsm(clk, rst, rs, rd, opcode, re, ri, fe, inop);
 				else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0010)
 					opcode = 5'b10111;
 				else
-					opcode = 0 & inop[15:12];
+					opcode = {1'b0, inop[15:12]};
 					
 				// Enable alu flags
 				fe = 1;
