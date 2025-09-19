@@ -30,8 +30,9 @@ module fsm(clk, rst, rs, rd, opcode, re, ri, fe, inop);
 	end
 			
 	always@ (state) begin
+		case (state) begin // add the corresponding 'end'
 		S0:
-			begin
+			begin // R0 <- R0 + 1
 				re = 16'h0000;
 				rs = 4'h0;
 				rd = 4'h0;
@@ -40,14 +41,14 @@ module fsm(clk, rst, rs, rd, opcode, re, ri, fe, inop);
 				fe = 1'b0;
 			end
 		S1:
-			begin
+			begin // R2 <- R0 + R1
 				re = 16'h0000;
 				
 				// Set rd and rs muxes
-				rd = inop[11:8];
-				rs = inop[3:0];
+				rd = inop[11:8]; // r1 = 4'b0001
+				rs = inop[3:0]; // r0 4'b0000
 				
-				// Open source and dest registers
+				// Open only the  dest registers
 				re[rd] = 1;
 				
 				if(inop[15:12] == 4'h0) begin
