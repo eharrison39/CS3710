@@ -25,9 +25,9 @@ input [4:0] in;
 input regEn, reset, clk;
 output reg [4:0] out;
 
-always @ (posedge clk)
+always @ (posedge clk or negedge reset)
 begin
-	if(reset)
+	if(~reset)
 		out <= 5'b00000;
 	else
 	begin

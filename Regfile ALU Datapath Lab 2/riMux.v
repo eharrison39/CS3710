@@ -22,6 +22,7 @@ begin
 		begin
 			out = imm;
 		end
+	default: out = rsrc;
 	endcase
 end
 

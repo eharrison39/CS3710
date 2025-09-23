@@ -46,21 +46,23 @@ parameter XOR = 5'b0_0011;
 parameter NOT = 5'b0_0100;
 
 // Shifting Opcodes
-parameter LSH = 8'b0_1100;
-parameter RSH = 8'b1_0011 ;
-parameter ARSH = 8'b1_0111 ;
+parameter LSH = 5'b0_1100;
+parameter RSH = 5'b1_0011 ;
+parameter ARSH = 5'b1_0111 ;
 
 
 // Begin opcodes case statement
 always @(A, B, Opcode, Cin)
 begin
+	C  = 16'h0000;
+	Flags[4:0] = 5'b0_0000;
 	case (Opcode)
 	
 	// Regular add without setting flags
 	ADDU:
 		begin
 			C = A + B;
-			Flags[4:0] = 5'b0_0000;
+			//Flags[4:0] = 5'b0_0000;
 		end
 	
 	// Regular add. Sets the Carry bit, Overflow bit, Negative bit, and the Zero bit
@@ -106,7 +108,7 @@ begin
 	ADDCU:
 		begin
 			C = A + B + Cin;
-			Flags[4:0] = 5'b0_0000;
+			//Flags[4:0] = 5'b0_0000;
 		end
 	
 	// Regular subtract. Sets the Overflow bit, Negative bit, and the Zero bit
@@ -157,12 +159,12 @@ begin
 	AND:
 		begin
 			C = A & B;
-			Flags = 5'b0_0000;
+			//Flags = 5'b0_0000;
 		end
 	OR:
 		begin
 			C = A | B;
-			Flags = 5'b0_0000;
+			//Flags = 5'b0_0000;
 		end
 	XOR:
 		begin
@@ -172,28 +174,28 @@ begin
 	NOT:
 		begin
 			C = ~A;
-			Flags = 5'b0_0000;
+			//Flags = 5'b0_0000;
 		end
 		
 	// Shifting arithmetic. No flag bits set (Arithmetic and Logic Left Shift) - (They do the same thing)
 	LSH:
 		begin
 			C = A << B;
-			Flags = 5'b0_0000;
+			//Flags = 5'b0_0000;
 		end
 
 	// Logical right shift
 	RSH:
 		begin
 			C = A >> B;
-			Flags = 5'b0_0000;
+			//Flags = 5'b0_0000;
 		end
 	
 	// Arithmetic right shift
 	ARSH:
 		begin
 			C = $signed(A) >>> B;
-			Flags = 5'b0_0000;
+			//Flags = 5'b0_0000;
 		end
 
 	default: 

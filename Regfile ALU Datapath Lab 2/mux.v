@@ -93,6 +93,7 @@ begin
 		begin
 			out = r15;
 		end
+	default: out = 16'h0000;
 	endcase
 end
 

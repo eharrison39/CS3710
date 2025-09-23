@@ -18,7 +18,7 @@ module ffsm(clk, rst, rs, rd, opcode, re, ri, fe, imm);
 						 S5 = 4'b0101, S6 = 4'b0110,  S7 = 4'b0111,  S8 = 4'b1000,  S9 = 4'b1001,  
 						 S10 = 4'b1010, S11 = 4'b1011, S12 = 4'b1100, S13 = 4'b1101, S14 = 4'b1110;
 	
-	always @(posedge clk) begin
+	always @(posedge clk or negedge rst) begin
 	 if (~rst)
 		state <= S0;
 	 else
