@@ -10,8 +10,10 @@ module fsmtest;
 	
 	always #5 clk = ~clk;
 
+	// Instantiate the regfile alu datapath
 	regfileAluDatapath uut(.clk(clk), .rst(reset), .segOutput1(seg1), .segOutput2(seg2), .segOutput3(seg3));
-	
+
+	// After setup hit reset and start running the clock
 	initial begin
 		reset = 0;
 		
@@ -175,8 +177,4 @@ module fsmtest;
 	end
 
 endmodule
-
-
-//
-//endmodule
 

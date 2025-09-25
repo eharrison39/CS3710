@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 
 // @Authors Luke Jones, David Brown, Elden Harrison
-// Mux module, 16 registers as input with a 4 bit opcode as the control line
-// look into an actual verilog mux
+// RiMux module, the source register and an immediate as input with a 1 bit control line
+
 module riMux (rsrc, imm, ri, out);
 	
 	input ri;
 	input [15:0] rsrc, imm;
 	output reg[15:0] out;
-	
+
 always @(ri, rsrc, imm)
 begin
 	case (ri)

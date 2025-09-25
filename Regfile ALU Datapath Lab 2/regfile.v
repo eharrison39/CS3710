@@ -2,17 +2,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: 
+// Engineer: 		Luke Jones
 // 
-// Create Date:    15:24:24 09/13/2015 
+// Create Date:    09/12/2025
 // Design Name: 
 // Module Name:    regbank 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
+// Dependencies: ALU, fsm
 //
 // Revision: 
 // Revision 0.01 - File Created
@@ -29,7 +24,7 @@ module regfile(aluBus, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r1
 	input [15:0] regEn;
 	output [15:0] r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15;
 
-	
+// Instantiate all registers, connecting the aluBus and output
 register reg0(aluBus, regEn[0], reset, clk, r0);
 register reg1(aluBus, regEn[1], reset, clk, r1);
 register reg2(aluBus, regEn[2], reset, clk, r2);

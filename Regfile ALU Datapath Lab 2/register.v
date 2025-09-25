@@ -1,22 +1,14 @@
 
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Engineer: 		Luke Jones
 // 
-// Create Date:    15:24:24 09/13/2015 
+// Create Date:    	09/09/2025
 // Design Name: 
-// Module Name:    regbank 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
+// Module Name:    	register
+
+// Additional Comments: A simple register that when enabled sets data to incoming
+//						data. 
 //
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -25,7 +17,7 @@ input [15:0] in;
 input regEn, reset, clk;
 output reg [15:0] out;
 
-always @ (posedge clk or negedge reset)
+always @ (posedge clk)
 begin
 	if(~reset)
 		out <= 16'h0000;

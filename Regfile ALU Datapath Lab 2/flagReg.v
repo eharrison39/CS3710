@@ -2,19 +2,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: 
+// Engineer: 		Luke Jones
 // 
-// Create Date:    15:24:24 09/13/2015 
+// Create Date:    09/13/2025
 // Design Name: 
-// Module Name:    regbank 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
+// Module Name:    flag reg
+// Revision: 		
 // Revision 0.01 - File Created
 // Additional Comments: 
 //
@@ -25,7 +18,7 @@ input [4:0] in;
 input regEn, reset, clk;
 output reg [4:0] out;
 
-always @ (posedge clk or negedge reset)
+always @ (posedge clk)
 begin
 	if(~reset)
 		out <= 5'b00000;

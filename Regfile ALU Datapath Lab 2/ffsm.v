@@ -1,7 +1,9 @@
 `timescale 1ns / 1ps
 
 // @Authors Luke Jones, David Brown, Elden Harrison
-// fsm module
+// Fibonacci sequence fsm module
+// State 0 puts a 1 inside of R1. The rest of the states
+// is a single iteration of the fibonacci sequence all the way up to 610 or 4'h0262
 
 //
 module ffsm(clk, rst, rs, rd, opcode, re, ri, fe, imm);
@@ -18,7 +20,8 @@ module ffsm(clk, rst, rs, rd, opcode, re, ri, fe, imm);
 						 S5 = 4'b0101, S6 = 4'b0110,  S7 = 4'b0111,  S8 = 4'b1000,  S9 = 4'b1001,  
 						 S10 = 4'b1010, S11 = 4'b1011, S12 = 4'b1100, S13 = 4'b1101, S14 = 4'b1110;
 	
-	always @(posedge clk or negedge rst) begin
+	// Iterate to next state on the posedge of the clock
+	always @(posedge clk) begin
 	 if (~rst)
 		state <= S0;
 	 else
@@ -41,14 +44,15 @@ module ffsm(clk, rst, rs, rd, opcode, re, ri, fe, imm);
 			default: state <= S0;
 		endcase
 	end
-			
+
+	// Define what happens in each state.	
 	always@ (state) begin
 		re = 16'h0000;
 		imm = 0;
 		ri = 0;
 		fe = 1;
 		opcode = 5'b0_0101;
-		case (state)  // add the corresponding 'end'
+		case (state)
 			S0:
 				begin // R1 <- R0 + 1
 					rs = 4'h0;

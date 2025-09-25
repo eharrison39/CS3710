@@ -9,7 +9,7 @@ module mux (r, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, 
 	input [15:0] r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15;
 	output reg[15:0] out;
 	
-	
+// Based on the control line r set output of the mux to a specific register
 always @(r, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15)
 begin
 	case (r)
