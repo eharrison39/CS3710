@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 
-module fsmtest;
+module fsmtesttwo;
 
 	// inputs
 	reg clk = 1;
@@ -10,7 +10,7 @@ module fsmtest;
 	
 	always #5 clk = ~clk;
 
-	regfileAluDatapath uut(.clk(clk), .rst(reset), .segOutput1(seg1), .segOutput2(seg2), .segOutput3(seg3));
+	regfileAluDatapathtwo uut(.clk(clk), .rst(reset), .segOutput1(seg1), .segOutput2(seg2), .segOutput3(seg3));
 	
 	initial begin
 		reset = 0;
@@ -82,7 +82,7 @@ module fsmtest;
 		#10
 		// S6
 		
-		if(seg1 == ~7'b0111101 && seg2 == ~7'b1111110 && seg3 == ~7'b1111110) begin
+		if(seg1 == ~7'b1110000 && seg2 == ~7'b1111110 && seg3 == ~7'b1111110) begin
 			$display("S6: accepted");
 		end
 		else begin
@@ -92,7 +92,7 @@ module fsmtest;
 		#10
 		// S7
 		
-		if(seg1 == ~7'b1011011 && seg2 == ~7'b0110000 && seg3 == ~7'b1111110) begin
+		if(seg1 == ~7'b1111001 && seg2 == ~7'b1111110 && seg3 == ~7'b1111110) begin
 			$display("S7: accepted");
 		end
 		else begin
@@ -102,7 +102,7 @@ module fsmtest;
 		#10
 		// S8
 		
-		if(seg1 == ~7'b1101101 && seg2 == ~7'b1101101 && seg3 == ~7'b1111110) begin
+		if(seg1 == ~7'b1000111 && seg2 == ~7'b1111110 && seg3 == ~7'b1111110) begin
 			$display("S8: accepted");
 		end
 		else begin
@@ -112,7 +112,7 @@ module fsmtest;
 		#10
 		// S9
 		
-		if(seg1 == ~7'b1110000 && seg2 == ~7'b1111001 && seg3 == ~7'b1111110) begin
+		if(seg1 == ~7'b0011111 && seg2 == ~7'b1111110 && seg3 == ~7'b1111110) begin
 			$display("S9: accepted");
 		end
 		else begin
@@ -122,7 +122,7 @@ module fsmtest;
 		#10
 		// S10
 		
-		if(seg1 == ~7'b1110011 && seg2 == ~7'b1011011 && seg3 == ~7'b1111110) begin
+		if(seg1 == ~7'b1111110 && seg2 == ~7'b1000111 && seg3 == ~7'b1000111) begin
 			$display("S10: accepted");
 		end
 		else begin
@@ -132,7 +132,7 @@ module fsmtest;
 		#10
 		// S11
 		
-		if(seg1 == ~7'b1111110 && seg2 == ~7'b1110011 && seg3 == ~7'b1111110) begin
+		if(seg1 == ~7'b1111110 && seg2 == ~7'b0110000 && seg3 == ~7'b1111110) begin
 			$display("S11: accepted");
 		end
 		else begin
@@ -142,31 +142,11 @@ module fsmtest;
 		#10
 		// S12
 		
-		if(seg1 == ~7'b1110011 && seg2 == ~7'b1001111 && seg3 == ~7'b1111110) begin
+		if(seg1 == ~7'b0110011 && seg2 == ~7'b1111110 && seg3 == ~7'b1111110) begin
 			$display("S12: accepted");
 		end
 		else begin
 			$display("S12: denied");
-		end
-		
-		#10
-		// S13
-		
-		if(seg1 == ~7'b1110011 && seg2 == ~7'b1110000 && seg3 == ~7'b0110000) begin
-			$display("S13: accepted");
-		end
-		else begin
-			$display("S13: denied");
-		end
-		
-		#10
-		// S14
-		
-		if(seg1 == ~7'b1101101 && seg2 == ~7'b1011111 && seg3 == ~7'b1101101) begin
-			$display("S14: accepted");
-		end
-		else begin
-			$display("S14: denied");
 		end
 		
 	
