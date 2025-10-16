@@ -15,9 +15,11 @@ module fsmtest;
 
 	// After setup hit reset and start running the clock
 	initial begin
+		reset = 0;
+		#10
+		reset = 1;
 		
-		
-		#5
+		#200;
 		
 	
 		$finish(2);
