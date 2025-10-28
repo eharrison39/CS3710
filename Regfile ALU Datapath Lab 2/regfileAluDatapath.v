@@ -12,6 +12,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
+(* keep_hierarchy = "yes" *)
+(* noprune = 1 *)
 module regfileAluDatapath(clk, rst, segOutput1, segOutput2, segOutput3);
 
 input wire clk, rst;
@@ -25,6 +27,7 @@ wire [15:0] regEn;  // Register Enables
 wire [3:0] destMuxControl, srcMuxControl;  // Mux Control Lines
 wire [15:0] destMuxOut, srcMuxOut, srcImmRegOut;  // Mux Output Wires
 wire [4:0] flags;  // flags wire
+wire [4:0] aluFlags;
 wire fe, ri;  // Flag enable control wire and register immediate control line
 wire [4:0] opc5;    // Opcode from the fsm fed into the alu
 
@@ -42,8 +45,8 @@ mux srcMux(.r0(r0), .r1(r1), .r2(r2), .r3(r3), .r4(r4), .r5(r5), .r6(r6), .r7(r7
 riMux immediateMux(.ri(ri), .rsrc(srcMuxOut), .imm(imm), .out(srcImmRegOut));
 
 // Instantiate the alu with the 
-alu alu(.A(destMuxOut), .B(srcImmRegOut), .C(aluBus), .Opcode(opc5), .Flags(flags), .Cin(~opc5[4] & opc5[2] & opc5[1] & opc5[0]));
-flagReg flagReg(.in(flags), .regEn(fe), .reset(rst), .clk(clk), .out(flags));
+alu alu(.A(destMuxOut), .B(srcImmRegOut), .C(aluBus), .Opcode(opc5), .Flags(aluFlags), .Cin(~opc5[4] & opc5[2] & opc5[1] & opc5[0]));
+flagReg flagReg(.in(aluFlags), .regEn(fe), .reset(rst), .clk(clk), .out(flags));
 
 // Have bcd to seven seg display what the alu outputs
 bcd_to_sev_seg bcd1(aluBus[3:0], segOutput1);

@@ -13,6 +13,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
+(* preserve, keep *)
 module flagReg(in, regEn, reset, clk, out);
 input [4:0] in;
 input regEn, reset, clk;
