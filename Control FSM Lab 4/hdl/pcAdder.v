@@ -10,7 +10,7 @@
 // Description: Increments the PC register by k and outputs the new address
 //////////////////////////////////////////////////////////////////////////////////
 
-module pc(
+module pcAdder(
 	 input [15:0] k,
     input pcEn,
     input reset,
@@ -32,4 +32,4 @@ assign addr = pc_out;
 endmodule
 	
 	
-	
+	 

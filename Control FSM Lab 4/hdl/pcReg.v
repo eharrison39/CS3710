@@ -16,9 +16,11 @@
 module pcReg(in, pcEn, reset, clk, out);
 input [15:0] in;
 input pcEn, reset, clk;
-output reg [15:0] out;
+output [15:0] out;
 
 
-(* preserve, keep *)register thePcReg(in, pcEn, reset, clk, out);
+(* preserve, keep *)register thePcReg(.in(in), .regEn(pcEn), .reset(reset), .clk(clk), .out(out));
 
 endmodule
+
+
