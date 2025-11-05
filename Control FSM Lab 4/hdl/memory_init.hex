@@ -6,3 +6,4 @@
 1133      // address 511
 1233      // address 512
 3331      // address 513
+@3FF	  // jump to address 1023

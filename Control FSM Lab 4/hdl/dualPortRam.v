@@ -1,7 +1,7 @@
 // Quartus Prime Verilog Template
 // True Dual Port RAM with single clock
 
-module true_dual_port_ram_single_clock
+module dualPortRam
 #(parameter DATA_WIDTH=16, parameter ADDR_WIDTH=10, parameter INIT_FILE = "memory_init.hex")
 (
 	input [(DATA_WIDTH-1):0] data_a, data_b,
@@ -11,7 +11,7 @@ module true_dual_port_ram_single_clock
 );
 
 	// Declare the RAM variable
-	reg [DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
+	reg [(DATA_WIDTH-1):0] ram[(2**ADDR_WIDTH)-1:0];
 	
 	integer i;
 	
