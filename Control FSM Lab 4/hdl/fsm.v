@@ -13,17 +13,15 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-module fsm(clk, rst, inop, rsMuxCtrl, rdMuxCtrl, opcode, regEn, fe, imm, ri, pcEn);
+module fsm(clk, rst, inop, instruction, rsMuxCtrl, rdMuxCtrl, opcode, regEn, fe, imm, ri, pcEn);
 
 input clk, rst;
-input [15:0] inop;
+input [15:0] inop, instruction;
 output reg [3:0] rsMuxCtrl, rdMuxCtrl;
 output reg [4:0] opcode;
 output reg [15:0] regEn;
 output reg [7:0] imm;
-output reg fe, ri, pcEn;
-
-reg [15:0] instruction;
+output reg fe, ri, pcEn, ir;
 
 reg [2:0] state;
 parameter [2:0] s0 = 3'b000, s1 = 3'b001, s2 = 3'b010;
@@ -35,7 +33,7 @@ wire [15:0] decRegEn;
 wire [7:0] decImm;
 wire decRi;
 
-decoder theDecoder(inop, decRsMuxCtrl, decRdMuxCtrl, decOpcode, decRegEn, decImm, decRi);
+decoder theDecoder(instruction, decRsMuxCtrl, decRdMuxCtrl, decOpcode, decRegEn, decImm, decRi);
 
 always @(posedge clk) begin
 
@@ -44,8 +42,18 @@ always @(posedge clk) begin
 	else
 		case(state)
 			s0: state <= s1;
-			s1: state <= s2;
+			s1: begin
+				if(true) // If r-type instruction.
+					state <= s2;
+				else if(false) // If store instruction.
+					;// state <= s3;
+				else if(false) // If load instruction.
+					;// state <= s4;
+			end
 			s2: state <= s0;
+			// Add s3 <= s0;
+			// Add s4 <= s5;
+			// Add s5 <= s0;
 			
 			default: state <= s0;
 		endcase
@@ -59,27 +67,29 @@ always @(state) begin
 	regEn = 0;
 	fe = 1;
 	ri = 0;
+	ir = 0;
 	pcEn = 0;
-	instruction = instruction;
 	
 	case(state)
-		s0: begin
-			instruction = inop;
-		end
+		s0: ;
 		
 		s1: begin
-			if(instruction[15:12] != 4'b0100)
-				;// We're chillin
+			ir = 1;
 		end
 		
-		s2: begin
-			pcEn = 1;
+		s2: begin // This is chillin.  It has all the right outputs for an r-type instruction.
 			rsMuxCtrl = decRsMuxCtrl;
 			rdMuxCtrl = decRdMuxCtrl;
 			opcode = decOpcode;
+			regEn = decRegEn
 			imm = decImm;
 			ri = decRi;
+			pcEn = 1;
 		end
+		// Add s3, s4, and s5
+		
+		default: ;
+		
 	endcase
 end
 endmodule
