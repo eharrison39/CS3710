@@ -13,9 +13,9 @@
 module pcAdder(
 	 input [15:0] k,
     input pcEn,
-    input reset,
+    input rst,
     input clk,
-    output [15:0] addr
+    output [9:0] addr
 );
 wire [15:0] pc_in;
 wire [15:0] pc_out;

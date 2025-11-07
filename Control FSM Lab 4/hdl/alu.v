@@ -18,13 +18,13 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module alu( A, B, C, Opcode, Flags, Cin
-    );
-input [15:0] A, B;
-input [4:0] Opcode;
-input Cin;
-output reg [15:0] C;
-output reg [4:0] Flags;
+module alu(a, b, c, opcode, flags, cin);
+
+input [15:0] a, b;
+input [4:0] opcode;
+input cin;
+output reg [15:0] c;
+output reg [4:0] flags;
 
 
 // Add Opcodes
@@ -52,16 +52,16 @@ parameter ARSH = 5'b1_0111 ;
 
 
 // Begin opcodes case statement
-always @(A, B, Opcode, Cin)
+always @(a, b, opcode, cin)
 begin
-	C  = 16'h0000;
-	Flags[4:0] = 5'b0_0000;
-	case (Opcode)
+	c  = 16'h0000;
+	flags[4:0] = 5'b0_0000;
+	case (opcode)
 	
 	// Regular add without setting flags
 	ADDU:
 		begin
-			C = A + B;
+			c = a + b;
 			//Flags[4:0] = 5'b0_0000;
 		end
 	
@@ -69,139 +69,139 @@ begin
 	ADD:
 		begin
 			// Set C and Carry bit
-			{Flags[4], C} = A + B;
+			{flags[4], c} = a + b;
 			
 			// Set Zero bit
-			if (C == 16'b0000_0000_0000_0000)
-				Flags[1] = 1'b1;
+			if (c == 16'b0000_0000_0000_0000)
+				flags[1] = 1'b1;
 			else
-				Flags[1] = 1'b0;
+				flags[1] = 1'b0;
 			
 			// Set Overflow bit
-			if( (~A[15] & ~B[15] & C[15]) | (A[15] & B[15] & ~C[15]) )
-				Flags[2] = 1'b1;
+			if( (~a[15] & ~b[15] & c[15]) | (a[15] & b[15] & ~c[15]) )
+				flags[2] = 1'b1;
 			else
-				Flags[2] = 1'b0;
+				flags[2] = 1'b0;
 				
-			Flags[3] = 1'b0; Flags[0] = C[15]; // Set Negative bit
+			flags[3] = 1'b0; flags[0] = c[15]; // Set Negative bit
 		end
 	
 	// Functions and sets flags the same way as "ADD" but just adding a carry bit.
 	ADDC:
 		begin
-			{Flags[4], C} = A + B + Cin;
+			{flags[4], c} = a + b + cin;
 			
-			if (C == 16'b0000_0000_0000_0000)
-				Flags[1] = 1'b1;
+			if (c == 16'b0000_0000_0000_0000)
+				flags[1] = 1'b1;
 			else
-				Flags[1] = 1'b0;
+				flags[1] = 1'b0;
 				
-			if( (~A[15] & ~B[15] & C[15]) | (A[15] & B[15] & ~C[15]) )
-				Flags[2] = 1'b1;
+			if( (~a[15] & ~b[15] & c[15]) | (a[15] & b[15] & ~c[15]) )
+				flags[2] = 1'b1;
 			else
-				Flags[2] = 1'b0;
+				flags[2] = 1'b0;
 				
-			Flags[3] = 1'b0; Flags[0] = C[15];
+			flags[3] = 1'b0; flags[0] = c[15];
 		end
 	
 	// Regular ADD carry but doesn't set the flag bits.
 	ADDCU:
 		begin
-			C = A + B + Cin;
-			//Flags[4:0] = 5'b0_0000;
+			c = a + b + cin;
+			//flags[4:0] = 5'b0_0000;
 		end
 	
 	// Regular subtract. Sets the Overflow bit, Negative bit, and the Zero bit
 	SUB:
 		begin
-			C = A - B;
+			c = a - b;
 			
 			// Set Zero bit
-			if (C == 16'b0000_0000_0000_0000)
-				Flags[1] = 1'b1;
+			if (c == 16'b0000_0000_0000_0000)
+				flags[1] = 1'b1;
 			else
-				Flags[1] = 1'b0;
+				flags[1] = 1'b0;
 			
 			// Set Overflow bit
-			if( (A[15] ^ B[15]) & (A[15] ^ C[15]) )
-				Flags[2] = 1'b1;
+			if( (a[15] ^ b[15]) & (a[15] ^ c[15]) )
+				flags[2] = 1'b1;
 			else
-				Flags[2] = 1'b0;
+				flags[2] = 1'b0;
 			
-			Flags[4:3] = 2'b00; Flags[0] = C[15]; // Set Negative bit
+			flags[4:3] = 2'b00; flags[0] = c[15]; // Set Negative bit
 		end
 	
 	// Comparison instruction only sets flags. CMP sets the zero bit, low bit, and negative bit
 	CMP:
 		begin
-			// Set zero bit if A == B (A - B = 0)
-			if(A == B)
-				Flags[1] = 1'b1;
+			// Set zero bit if a == b (a - b = 0)
+			if(a == b)
+				flags[1] = 1'b1;
 			else
-				Flags[1] = 1'b0;
+				flags[1] = 1'b0;
 			
 			// Set negative bit if signed a is less than signed b
-			if( $signed(A) < $signed(B) ) 
-				Flags[0] = 1'b1;
+			if( $signed(a) < $signed(b) ) 
+				flags[0] = 1'b1;
 			else 
-				Flags[0] = 1'b0;
+				flags[0] = 1'b0;
 			
 			// Set low bit if unsigned a is less than unsigned b
-			Flags[3] = (A < B);
+			flags[3] = (a < b);
 				
-			Flags[2] = 1'b0;
-			Flags[4] = 1'b0;
+			flags[2] = 1'b0;
+			flags[4] = 1'b0;
 			
-			C = 16'b0000_0000_0000_0000;	
+			c = 16'b0000_0000_0000_0000;	
 		end
 
 // Bit Logic gates. They don't set any flag bits
 	AND:
 		begin
-			C = A & B;
-			//Flags = 5'b0_0000;
+			c = a & b;
+			//flags = 5'b0_0000;
 		end
 	OR:
 		begin
-			C = A | B;
-			//Flags = 5'b0_0000;
+			c = a | b;
+			//flags = 5'b0_0000;
 		end
 	XOR:
 		begin
-			C = A ^ B;
-			Flags = 5'b0_0000;
+			c = a ^ b;
+			flags = 5'b0_0000;
 		end
 	NOT:
 		begin
-			C = ~A;
-			//Flags = 5'b0_0000;
+			c = ~a;
+			//flags = 5'b0_0000;
 		end
 		
 	// Shifting arithmetic. No flag bits set (Arithmetic and Logic Left Shift) - (They do the same thing)
 	LSH:
 		begin
-			C = A << B;
-			//Flags = 5'b0_0000;
+			c = a << b;
+			//flags = 5'b0_0000;
 		end
 
 	// Logical right shift
 	RSH:
 		begin
-			C = A >> B;
-			//Flags = 5'b0_0000;
+			c = a >> b;
+			//flags = 5'b0_0000;
 		end
 	
 	// Arithmetic right shift
 	ARSH:
 		begin
-			C = $signed(A) >>> B;
-			//Flags = 5'b0_0000;
+			c = $signed(a) >>> b;
+			//flags = 5'b0_0000;
 		end
 
 	default: 
 		begin
-			C = 16'b0000_0000_0000_0000;
-			Flags = 5'b0_0000;
+			c = 16'b0000_0000_0000_0000;
+			flags = 5'b0_0000;
 		end
 	endcase
 end

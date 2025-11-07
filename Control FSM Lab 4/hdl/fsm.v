@@ -43,11 +43,11 @@ always @(posedge clk) begin
 		case(state)
 			s0: state <= s1;
 			s1: begin
-				if(true) // If r-type instruction.
+				if(inop[15:12] != 4'h4 && inop[15:12] != 4'hc) // If r-type instruction.
 					state <= s2;
-				else if(false) // If store instruction.
+				else if(inop[15:12] == 4'h4 && inop[7:4] == 4'h4) // If store instruction.
 					;// state <= s3;
-				else if(false) // If load instruction.
+				else if(inop[15:12] == 4'h4 && inop[7:4] == 4'h0) // If load instruction.
 					;// state <= s4;
 			end
 			s2: state <= s0;
