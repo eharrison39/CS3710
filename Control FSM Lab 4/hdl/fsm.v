@@ -13,7 +13,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-module fsm(clk, rst, inop, instruction, rsMuxCtrl, rdMuxCtrl, opcode, regEn, fe, imm, ri, pcEn);
+module fsm(clk, rst, inop, instruction, rsMuxCtrl, rdMuxCtrl, opcode, regEn, fe, imm, ri, pcEn, ir);
 
 input clk, rst;
 input [15:0] inop, instruction;
@@ -81,7 +81,7 @@ always @(state) begin
 			rsMuxCtrl = decRsMuxCtrl;
 			rdMuxCtrl = decRdMuxCtrl;
 			opcode = decOpcode;
-			regEn = decRegEn
+			regEn = decRegEn;
 			imm = decImm;
 			ri = decRi;
 			pcEn = 1;
