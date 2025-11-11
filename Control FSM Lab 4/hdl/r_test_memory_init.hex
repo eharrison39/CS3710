@@ -1,0 +1,5 @@
+5005      // address 0, ADDI r0,  5
+0F50      // address 1, ADD  r15, r0
+0F50      // address 2, ADD  r15, r0
+5185      // address 4, ADDI r1,  133
+0F91      // address 5, SUB  r15, r1

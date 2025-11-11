@@ -23,8 +23,10 @@ module decoder(inop, rsMuxCtrl, rdMuxCtrl, opcode, regEn, imm, ri);
 	output reg ri;
 
 	always @(*) begin
-		rsMuxCtrl = inop[11:8];
-		rdMuxCtrl = inop[3:0];
+//		rsMuxCtrl = inop[11:8];
+//		rdMuxCtrl = inop[3:0];
+		rsMuxCtrl = inop[3:0];
+		rdMuxCtrl = inop[11:8];
 
 		// Set alu opcode
 		if(inop[15:12] == 4'h0)
@@ -44,8 +46,8 @@ module decoder(inop, rsMuxCtrl, rdMuxCtrl, opcode, regEn, imm, ri);
 		regEn = 0;
 		regEn[rdMuxCtrl] = 1;
 
-		if(inop[15:12] == 4'h0)
-			regEn[rsMuxCtrl] = 1;
+//		if(inop[15:12] == 4'h0)
+//			regEn[rsMuxCtrl] = 1;
 			
 		// Set the immediate value
 		if(inop[15:12] == 4'h8)

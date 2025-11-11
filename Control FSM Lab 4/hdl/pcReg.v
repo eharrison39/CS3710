@@ -13,13 +13,24 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
+
 module pcReg(in, pcEn, reset, clk, out);
-input [15:0] in;
+input [9:0] in;
 input pcEn, reset, clk;
-output [15:0] out;
+output reg [9:0] out;
 
-
-(* preserve, keep *)register thePcReg(.in(in), .regEn(pcEn), .reset(reset), .clk(clk), .out(out));
+always @ (posedge clk)
+begin
+	if(~reset)
+		out <= 10'b0000000000;
+	else
+	begin
+		if(pcEn)
+			out <= in;
+		else
+			out <= out;
+	end
+end
 
 endmodule
 

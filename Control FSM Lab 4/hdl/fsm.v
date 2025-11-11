@@ -20,7 +20,7 @@ input [15:0] inop, instruction;
 output reg [3:0] rsMuxCtrl, rdMuxCtrl;
 output reg [4:0] opcode;
 output reg [15:0] regEn;
-output reg [7:0] imm;
+output reg [15:0] imm;
 output reg fe, ri, pcEn, ir;
 
 reg [2:0] state;
@@ -61,30 +61,31 @@ end
 
 always @(state) begin
 	// defaults
-	rsMuxCtrl = 0;
-	rdMuxCtrl = 0;
-	opcode = 0;
-	regEn = 0;
-	fe = 1;
-	ri = 0;
-	ir = 0;
-	pcEn = 0;
+	rsMuxCtrl = 4'b0000;
+	rdMuxCtrl = 4'b0000;
+	opcode = 5'b00000;
+	regEn = 16'h0000;
+	fe = 1'b1;
+	ri = 1'b0;
+	ir = 1'b0;
+	pcEn = 1'b0;
+	imm = 16'h0000;
 	
 	case(state)
 		s0: ;
 		
 		s1: begin
-			ir = 1;
+			ir = 1'b1;
 		end
 		
 		s2: begin // This is chillin.  It has all the right outputs for an r-type instruction.
+			pcEn = 1'b1;
 			rsMuxCtrl = decRsMuxCtrl;
 			rdMuxCtrl = decRdMuxCtrl;
 			opcode = decOpcode;
 			regEn = decRegEn;
-			imm = decImm;
+			imm = {8'h00, decImm};
 			ri = decRi;
-			pcEn = 1;
 		end
 		// Add s3, s4, and s5
 		

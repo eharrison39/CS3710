@@ -10,17 +10,23 @@
 // Description: Increments the PC register by k and outputs the new address
 //////////////////////////////////////////////////////////////////////////////////
 
-module pcAdder(k, curAddr, nextAddr);
+module testPCAdder(
+	 input [9:0] k,
+    input pcEn,
+    input rst,
+    input clk,
+    output [9:0] addr
+);
+wire [9:0] pc_in;
+wire [9:0] pc_out;
 
-input [9:0] k, curAddr;
-output reg [9:0] nextAddr;
+// Add k to the current PC value
+assign pc_in = pc_out + k;
 
-always @(k, curAddr) begin
-	nextAddr = k + curAddr;
-end
+// Instantiate the PC register
+pcReg thePcReg (.in(pc_in), .pcEn(pcEn), .reset(reset), .clk(clk),.out(pc_out));
 
+// Output the current address
+assign addr = pc_out;
 
 endmodule
-	
-	
-	 
