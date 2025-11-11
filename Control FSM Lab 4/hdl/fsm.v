@@ -13,7 +13,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-module fsm(clk, rst, inop, rsMuxCtrl, rdMuxCtrl, opcode, regEn, fe, imm, ri, pcEn, ir, writeEn, lsCtrl);
+module fsm(clk, rst, inop, rsMuxCtrl, rdMuxCtrl, opcode, regEn, fe, imm, ri, pcEn, ir, writeEn, lsCtrl, aluMuxCtrl);
 
 input clk, rst;
 input [15:0] inop;
@@ -21,10 +21,10 @@ output reg [3:0] rsMuxCtrl, rdMuxCtrl;
 output reg [4:0] opcode;
 output reg [15:0] regEn;
 output reg [15:0] imm;
-output reg fe, ri, pcEn, ir, writeEn, lsCtrl;
+output reg fe, ri, pcEn, ir, writeEn, lsCtrl, aluMuxCtrl;
 
 reg [2:0] state;
-parameter [2:0] s0 = 3'b000, s1 = 3'b001, s2 = 3'b010, s3 = 3'b011;
+parameter [2:0] s0 = 3'b000, s1 = 3'b001, s2 = 3'b010, s3 = 3'b011, s4 = 3'b100, s5 = 3'b101;
 
 // Instanciate decoder
 wire [3:0] decRsMuxCtrl, decRdMuxCtrl;
@@ -48,12 +48,12 @@ always @(posedge clk) begin
 				else if(inop[15:12] == 4'h4 && inop[7:4] == 4'h4) // If store instruction.
 					state <= s3;
 				else if(inop[15:12] == 4'h4 && inop[7:4] == 4'h0) // If load instruction.
-					; // state <= s4;
+					state <= s4;
 			end
 			s2: state <= s0;
 			s3: state <= s0;
-			// Add s4 <= s5;
-			// Add s5 <= s0;
+			s4: state <= s5;
+			s5: state <= s0;
 			
 			default: state <= s0;
 		endcase
@@ -72,6 +72,7 @@ always @(state) begin
 	imm = 16'h0000;
 	lsCtrl = 1'b0;
 	writeEn = 1'b0;
+	aluMuxCtrl = 1'b0;
 	
 	case(state)
 		s0: ;
@@ -96,7 +97,16 @@ always @(state) begin
 			rsMuxCtrl = inop[11:8];
 			rdMuxCtrl = inop[3:0];
 		end
-		// Add s3, s4, and s5
+		s4: begin
+			rdMuxCtrl = decRdMuxCtrl;
+			rsMuxCtrl = decRsMuxCtrl;
+			lsCtrl = 1'b1;
+		end
+		s5: begin
+			pcEn = 1'b1;
+			aluMuxCtrl = 1'b1;
+			regEn = decRegEn;
+		end
 		
 		default: ;
 		

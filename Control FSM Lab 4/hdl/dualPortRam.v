@@ -2,7 +2,7 @@
 // True Dual Port RAM with single clock
 
 module dualPortRam
-#(parameter DATA_WIDTH=16, parameter ADDR_WIDTH=10, parameter INIT_FILE = "r_test_memory_init.hex")
+#(parameter DATA_WIDTH=16, parameter ADDR_WIDTH=10, parameter INIT_FILE = "store_test_memory_init.hex")
 (
 	input [(DATA_WIDTH-1):0] data_a, data_b,
 	input [(ADDR_WIDTH-1):0] addr_a, addr_b,

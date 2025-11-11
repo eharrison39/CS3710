@@ -34,11 +34,13 @@ input wire clk, rst;
 // Control outputs from fsm
 wire [15:0] regEn;
 wire [3:0] destMuxCtrl, srcMuxCtrl;
+wire lsCtrl, aluMuxCtrl;
 wire fe, ri, ir;
 wire [15:0] imm;
 
 // Regfile Alu Datapath wire connections
 wire [15:0] r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15;
+wire [15:0] aluOut;
 wire [15:0] aluBus;
 wire [15:0] destMuxOut, srcMuxOut, srcImmRegOut;
 wire [4:0] flags;
@@ -61,7 +63,6 @@ wire pcEn;
 wire [9:0] k = 10'h001;
 wire [9:0] pcAddr;
 wire [9:0] address;  // Address after mux
-wire lsCtrl;
 
 //Test
 //reg [9:0] testReg;
@@ -78,7 +79,7 @@ mux destMux( .r0(r0), .r1(r1), .r2(r2), .r3(r3), .r4(r4), .r5(r5), .r6(r6), .r7(
 mux srcMux( .r0(r0), .r1(r1), .r2(r2), .r3(r3), .r4(r4), .r5(r5), .r6(r6), .r7(r7), .r8(r8), .r9(r9), .r10(r10), .r11(r11), .r12(r12), .r13(r13), .r14(r14), .r15(r15), .r(srcMuxCtrl), .out(srcMuxOut));
 riMux immediateMux(.ri(ri), .rsrc(srcMuxOut), .imm(imm), .out(srcImmRegOut));
 
-alu alu(.a(destMuxOut), .b(srcImmRegOut), .c(aluBus), .opcode(opc5), .flags(aluFlags), .cin(~opc5[4] & opc5[2] & opc5[1] & opc5[0]));
+alu alu(.a(destMuxOut), .b(srcImmRegOut), .c(aluOut), .opcode(opc5), .flags(aluFlags), .cin(~opc5[4] & opc5[2] & opc5[1] & opc5[0]));
 flagReg flagReg(.in(aluFlags), .regEn(fe), .reset(rst), .clk(clk), .out(flags));
 
 // Memory
@@ -94,13 +95,16 @@ pcReg pcReg (.in(addrA), .pcEn(pcEn), .reset(rst), .clk(clk),.out(pcAddr));
 pcAdder pc (.k(k), .curAddr(pcAddr), .nextAddr(addrA));
 
 // Load Store ctrl
-twoBitMux addrMux(.rdest(destMuxOut), .pc(pcAddr), .ctrl(lsCtrl), .out(address));
+twoBitMux addrMux(.rdest(destMuxOut[9:0]), .pc(pcAddr), .ctrl(lsCtrl), .out(address));
+
+// ALU Mux
+aluMux aluMux(.aluOut(aluOut), .memData(memOutA), .ctrl(aluMuxCtrl), .out(aluBus));
 
 
 // FSM
 fsm theFsm(.clk(clk), .rst(rst), .inop(instruction), .rsMuxCtrl(srcMuxCtrl), .rdMuxCtrl(destMuxCtrl), 
 			  .opcode(opc5), .regEn(regEn), .fe(fe), .imm(imm), .ri(ri), .pcEn(pcEn), .ir(ir),
-			  .writeEn(memAEn), .lsCtrl(lsCtrl));
+			  .writeEn(memAEn), .lsCtrl(lsCtrl), .aluMuxCtrl(aluMuxCtrl));
 
 //always @(posedge clk) begin
 //	if(~rst)

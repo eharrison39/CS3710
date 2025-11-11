@@ -1,0 +1,4 @@
+5821      // address 0, ADDI r8,  33
+550f      // address 1, ADDI r5,  15
+4845      // address 2, Store  r8, r5    Store the contents of r8 in the address of r5 (r5 = addr15)
+4a05      // address 3, Load   r10, r5   Load the contents at address in r5 to r10
