@@ -61,7 +61,7 @@ wire pcEn;
 wire [9:0] k = 10'h001;
 wire [9:0] pcAddr;
 wire [9:0] address;  // Address after mux
-//wire lsCtrl;
+wire lsCtrl;
 
 //Test
 //reg [9:0] testReg;
@@ -82,7 +82,7 @@ alu alu(.a(destMuxOut), .b(srcImmRegOut), .c(aluBus), .opcode(opc5), .flags(aluF
 flagReg flagReg(.in(aluFlags), .regEn(fe), .reset(rst), .clk(clk), .out(flags));
 
 // Memory
-dualPortRam ram(.we_a(memAEn), .we_b(memBEn), .clk(clk), .addr_a(pcAddr), .addr_b(addrB), 
+dualPortRam ram(.we_a(memAEn), .we_b(memBEn), .clk(clk), .addr_a(address), .addr_b(addrB), 
 						  .data_a(srcMuxOut), .data_b(aluBus), .q_a(memOutA), .q_b(memOutB));
 						  
 // Instruction Register
@@ -94,14 +94,13 @@ pcReg pcReg (.in(addrA), .pcEn(pcEn), .reset(rst), .clk(clk),.out(pcAddr));
 pcAdder pc (.k(k), .curAddr(pcAddr), .nextAddr(addrA));
 
 // Load Store ctrl
-//twoBitMux addrMux(.rdest(destMuxOut), .pc(pcAddr), .ctrl(lsCtrl), .out(address));
+twoBitMux addrMux(.rdest(destMuxOut), .pc(pcAddr), .ctrl(lsCtrl), .out(address));
 
 
 // FSM
-fsm theFsm(.clk(clk), .rst(rst), .inop(instruction), //.instruction(instruction), 
-											.rsMuxCtrl(srcMuxCtrl), .rdMuxCtrl(destMuxCtrl), 
-			  .opcode(opc5), .regEn(regEn), .fe(fe), .imm(imm), .ri(ri), .pcEn(pcEn), .ir(ir));
-			  //, .writeEn(memAEn), .lsCtrl(lsCtrl));
+fsm theFsm(.clk(clk), .rst(rst), .inop(instruction), .rsMuxCtrl(srcMuxCtrl), .rdMuxCtrl(destMuxCtrl), 
+			  .opcode(opc5), .regEn(regEn), .fe(fe), .imm(imm), .ri(ri), .pcEn(pcEn), .ir(ir),
+			  .writeEn(memAEn), .lsCtrl(lsCtrl));
 
 //always @(posedge clk) begin
 //	if(~rst)
