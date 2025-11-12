@@ -46,8 +46,8 @@ module decoder(inop, rsMuxCtrl, rdMuxCtrl, opcode, regEn, imm, ri);
 		regEn = 0;
 		regEn[rdMuxCtrl] = 1;
 
-//		if(inop[15:12] == 4'h0)
-//			regEn[rsMuxCtrl] = 1;
+		if(inop[15:12] == 4'h0)
+			regEn[rsMuxCtrl] = 1;
 			
 		// Set the immediate value
 		if(inop[15:12] == 4'h8)

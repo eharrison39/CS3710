@@ -13,18 +13,18 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-module fsm(clk, rst, inop, rsMuxCtrl, rdMuxCtrl, opcode, regEn, fe, imm, ri, pcEn, ir, writeEn, lsCtrl, aluMuxCtrl);
+module fsm(clk, rst, inop, instruction, rsMuxCtrl, rdMuxCtrl, opcode, regEn, fe, imm, ri, pcEn, ir, writeEn, lsCtrl, aluMuxCtrl);
 
 input clk, rst;
-input [15:0] inop;
+input [15:0] inop, instruction;
 output reg [3:0] rsMuxCtrl, rdMuxCtrl;
 output reg [4:0] opcode;
 output reg [15:0] regEn;
 output reg [15:0] imm;
 output reg fe, ri, pcEn, ir, writeEn, lsCtrl, aluMuxCtrl;
 
-reg [2:0] state;
-parameter [2:0] s0 = 3'b000, s1 = 3'b001, s2 = 3'b010, s3 = 3'b011, s4 = 3'b100, s5 = 3'b101;
+reg [2:0] currState, nextState;
+parameter [2:0] s0 = 3'b000, s1a = 3'b110, s1 = 3'b001, s2 = 3'b010, s3 = 3'b011, s4 = 3'b100, s5 = 3'b101;
 
 // Instanciate decoder
 wire [3:0] decRsMuxCtrl, decRdMuxCtrl;
@@ -33,33 +33,35 @@ wire [15:0] decRegEn;
 wire [7:0] decImm;
 wire decRi;
 
-decoder theDecoder(inop, decRsMuxCtrl, decRdMuxCtrl, decOpcode, decRegEn, decImm, decRi);
+decoder theDecoder(instruction, decRsMuxCtrl, decRdMuxCtrl, decOpcode, decRegEn, decImm, decRi);
 
 always @(posedge clk) begin
 
 	if(~rst)
-		state <= s0;
+		nextState <= s0;
 	else
-		case(state)
-			s0: state <= s1;
+		currState <= nextState;
+		case(nextState)
+			s0: nextState <= s1a;
+			s1a: nextState <=s1;
 			s1: begin
 				if(inop[15:12] != 4'h4 && inop[15:12] != 4'hc) // If r-type instruction.
-					state <= s2;
+					nextState <= s2;
 				else if(inop[15:12] == 4'h4 && inop[7:4] == 4'h4) // If store instruction.
-					state <= s3;
+					nextState <= s3;
 				else if(inop[15:12] == 4'h4 && inop[7:4] == 4'h0) // If load instruction.
-					state <= s4;
+					nextState <= s4;
 			end
-			s2: state <= s0;
-			s3: state <= s0;
-			s4: state <= s5;
-			s5: state <= s0;
+			s2: nextState <= s0;
+			s3: nextState <= s0;
+			s4: nextState <= s5;
+			s5: nextState <= s0;
 			
-			default: state <= s0;
+			default: nextState <= s0;
 		endcase
 end
 
-always @(state) begin
+always @(*) begin
 	// defaults
 	rsMuxCtrl = 4'b0000;
 	rdMuxCtrl = 4'b0000;
@@ -74,8 +76,9 @@ always @(state) begin
 	writeEn = 1'b0;
 	aluMuxCtrl = 1'b0;
 	
-	case(state)
+	case(currState)
 		s0: ;
+		s1a: ;
 		
 		s1: begin
 			ir = 1'b1;
@@ -94,12 +97,12 @@ always @(state) begin
 			writeEn = 1'b1;
 			lsCtrl = 1'b1;
 			pcEn = 1'b1;
-			rsMuxCtrl = inop[11:8];
-			rdMuxCtrl = inop[3:0];
+			rsMuxCtrl = instruction[11:8];
+			rdMuxCtrl = instruction[3:0];
 		end
 		s4: begin
-			rdMuxCtrl = decRdMuxCtrl;
-			rsMuxCtrl = decRsMuxCtrl;
+			rdMuxCtrl = instruction[3:0];
+			//rsMuxCtrl = decRsMuxCtrl;
 			lsCtrl = 1'b1;
 		end
 		s5: begin

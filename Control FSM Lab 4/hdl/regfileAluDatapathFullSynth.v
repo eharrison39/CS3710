@@ -102,7 +102,7 @@ aluMux aluMux(.aluOut(aluOut), .memData(memOutA), .ctrl(aluMuxCtrl), .out(aluBus
 
 
 // FSM
-fsm theFsm(.clk(clk), .rst(rst), .inop(instruction), .rsMuxCtrl(srcMuxCtrl), .rdMuxCtrl(destMuxCtrl), 
+fsm theFsm(.clk(clk), .rst(rst), .inop(memOutA), .instruction(instruction), .rsMuxCtrl(srcMuxCtrl), .rdMuxCtrl(destMuxCtrl), 
 			  .opcode(opc5), .regEn(regEn), .fe(fe), .imm(imm), .ri(ri), .pcEn(pcEn), .ir(ir),
 			  .writeEn(memAEn), .lsCtrl(lsCtrl), .aluMuxCtrl(aluMuxCtrl));
 
