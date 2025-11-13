@@ -3,7 +3,7 @@
 // @Authors Luke Jones, David Brown, Elden Harrison
 // twoBitMux module, the destination register with the address and the program counter as input with a 1 bit control line
 
-module twoBitMux (rdest, pc, ctrl, out);
+module addrMux (rdest, pc, ctrl, out);
 	
 	input ctrl;
 	input [9:0] rdest, pc;

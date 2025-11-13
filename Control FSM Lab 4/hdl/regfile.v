@@ -4,8 +4,8 @@
 // Engineer: 		Luke Jones
 // 
 // Create Date:    09/12/2025
-// Module Name:    regbank 
-// Dependencies: ALU, fsm
+// Module Name:    regfile
+// Dependencies: 	 ALU, fsm
 //
 // Revision: 
 // Revision 0.01 - File Created

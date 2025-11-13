@@ -24,12 +24,14 @@
 /* These next two lines are there so the compiler gives an acurrate register count. Instead of optimizing.*/ 
 (* keep_hierarchy = "yes" *)
 (* noprune = 1 *)
-module cpuFullDatapath #(parameter INIT_FILE) (clk, rst);
+module cpuFullDatapathTB #(parameter INIT_FILE) 
+(clk, rst, r0, r1, r2, r3, r4, r5, r6, r7, r8, 
+		r9, r10, r11, r12, r13, r14, r15, flags, instruction, regEn);
 
 input wire clk, rst;
 
 // Control outputs from fsm
-wire [15:0] regEn;
+output wire [15:0] regEn;
 wire [3:0] destMuxCtrl, srcMuxCtrl;
 wire lsCtrl; 
 wire [1:0] pcMuxCtrl, aluMuxCtrl;
@@ -37,17 +39,16 @@ wire fe, ri, ir;
 wire [15:0] imm;
 
 // Regfile Alu Datapath wire connections
-wire [15:0] r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15;
+output wire [15:0] r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15;
 wire [15:0] aluOut;
 wire [15:0] aluBus;
 wire [15:0] destMuxOut, srcMuxOut, srcImmRegOut;
-wire [4:0] flags;
+output wire [4:0] flags;
 wire [4:0] aluFlags;
 wire [4:0] opc5;
 
-
 // FSM input
-wire [15:0] instruction;
+output wire [15:0] instruction;
 
 // Memory output and enables (fsm input)
 wire [15:0] memOutA, memOutB;

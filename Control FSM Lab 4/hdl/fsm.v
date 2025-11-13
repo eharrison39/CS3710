@@ -13,7 +13,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-module fsm(clk, rst, inop, instruction, flags, rsMuxCtrl, rdMuxCtrl, opcode, regEn, fe, imm, ri, pcEn, ir, writeEn, lsCtrl, aluMuxCtrl, pcMuxCtrl);
+module fsm(clk, rst, inop, instruction, flags, rsMuxCtrl, rdMuxCtrl, 
+					opcode, regEn, fe, imm, ri, pcEn, ir, writeEn, lsCtrl, aluMuxCtrl, pcMuxCtrl);
 
 input clk, rst;
 input [15:0] inop, instruction;
@@ -26,7 +27,8 @@ output reg [1:0] pcMuxCtrl, aluMuxCtrl;
 output reg fe, ri, pcEn, ir, writeEn, lsCtrl;
 
 reg [3:0]  state;
-parameter [3:0] s0 = 4'b0000, s1 = 4'b0001, s2 = 4'b0010, s3 = 4'b0011, s4 = 4'b0100, s5 = 4'b0101, s6 = 4'b0110, s7 = 4'b0111, s8 = 4'b1000;
+parameter [3:0] s0 = 4'b0000, s1 = 4'b0001, s2 = 4'b0010, s3 = 4'b0011, 
+					 s4 = 4'b0100, s5 = 4'b0101, s6 = 4'b0110, s7 = 4'b0111, s8 = 4'b1000;
 
 // Instantiate decoder
 wire [3:0] decRsMuxCtrl, decRdMuxCtrl;
@@ -125,7 +127,7 @@ always @(*) begin
 			regEn = decRegEn;
 		end
 		
-		// Branch
+		// Branch on condition
 		s7: begin
 			imm = {8'h00, decImm};
 			case (decRdMuxCtrl)

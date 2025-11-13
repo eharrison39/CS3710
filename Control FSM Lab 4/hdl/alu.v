@@ -46,7 +46,7 @@ parameter XOR = 5'b0_0011;
 parameter NOT = 5'b0_0100;
 
 // Shifting Opcodes
-parameter LSH = 5'b0_1100;
+parameter LSH = 5'b1_1100;
 parameter RSH = 5'b1_0011 ;
 parameter ARSH = 5'b1_0111 ;
 

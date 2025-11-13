@@ -31,13 +31,13 @@ module decoder(inop, rsMuxCtrl, rdMuxCtrl, opcode, regEn, imm, ri);
 		// Set alu opcode
 		if(inop[15:12] == 4'h0)
 			opcode = {1'b0, inop[7:4]};
-		else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0100)
-			opcode = 5'b11100;
-		else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0000)
-			opcode = 5'b11100;
-		else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0110)
+		else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0100)	// Left Shift
+			opcode = 5'b11100;	
+		else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0000)	// Left Shift Imm
+			opcode = 5'b11100;	
+		else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0110)	// Right Shift
 			opcode = 5'b10011;
-		else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0010)
+		else if(inop[15:12] == 4'b1000 && inop[7:4] == 4'b0010)	// Right Shift Imm
 			opcode = 5'b10111;
 		else
 			opcode = {1'b0, inop[15:12]};
