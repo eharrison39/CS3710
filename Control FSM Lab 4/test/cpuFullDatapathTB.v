@@ -26,7 +26,7 @@
 (* noprune = 1 *)
 module cpuFullDatapathTB #(parameter INIT_FILE) 
 (clk, rst, r0, r1, r2, r3, r4, r5, r6, r7, r8, 
-		r9, r10, r11, r12, r13, r14, r15, flags, instruction, regEn);
+		r9, r10, r11, r12, r13, r14, r15, flags, instruction, regEn, address);
 
 input wire clk, rst;
 
@@ -60,7 +60,7 @@ wire pcEn;
 wire [9:0] k;
 wire [9:0] one = 10'h001;
 wire [9:0] pcAddr;
-wire [9:0] address;  // Address after mux
+output wire [9:0] address;  // Address after mux
 
 
 // Regfile Alu Datapath

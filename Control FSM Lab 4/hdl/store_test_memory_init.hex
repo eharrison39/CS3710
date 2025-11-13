@@ -1,4 +1,21 @@
-5821      // address 0, ADDI r8,  33
-550f      // address 1, ADDI r5,  15
+5821      // address 0, ADDI r8,  21
+5519      // address 1, ADDI r5,  19
+2008
+2101
+0051
+0090
+0851
+2221
+2322
+2423
+2624
+4842
+4702
+4543
+4144
+4246
+4903
+4a04
+4b06
 4845      // address 2, Store  r8, r5    Store the contents of r8 in the address of r5 (r5 = addr15)
 4a05      // address 3, Load   r10, r5   Load the contents at address in r5 to r10

@@ -103,7 +103,7 @@ module rTypeTest;
 //		else
 //			$display("FAIL: r0 == %0d", cpu.ref.r0);
 			
-		//$finish;
+		$finish;
 		
 	end
 
