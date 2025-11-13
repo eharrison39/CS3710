@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 // @Authors Luke Jones, David Brown, Elden Harrison
-// RiMux module, the source register and an immediate as input with a 1 bit control line
+// twoBitMux module, the destination register with the address and the program counter as input with a 1 bit control line
 
 module twoBitMux (rdest, pc, ctrl, out);
 	

@@ -6,21 +6,26 @@ module rTypeTest;
 	// inputs
 	reg clk = 1;
 	reg reset = 1;
-	//wire [6:0] seg0, seg1, seg2, seg3;
 	
 	always #5 clk = ~clk;
-
-	// Instantiate the fsm wrapper
-	//fsmWrapper uut(.clk(clk), .rst(reset), .seg0(seg0), .seg1(seg1), .seg2(seg2), .seg3(seg3));
 	
-	regfileAluDatapathFullSynth cpu(.rst(reset), .clk(clk));
+	regfileAluDatapathFullSynth #(.INIT_FILE("jb_test_memory_init.hex")) cpu(.rst(reset), .clk(clk));
 
 	// After setup hit reset && start running the clock
 	initial begin
+		
+
 		reset = 0;
 		#50
-		reset = 1;	
+		reset = 1;
 		
+		#50
+		
+//		if(cpu.ref.r0 == 'h0005)
+//			$display("PASS: r0 == %0d", cpu.ref.r0);
+//		else
+//			$display("FAIL: r0 == %0d", cpu.ref.r0);
+			
 		$finish;
 		
 	end

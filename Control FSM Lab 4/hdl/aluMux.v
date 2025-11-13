@@ -3,24 +3,29 @@
 // @Authors Luke Jones, David Brown, Elden Harrison
 // RiMux module, the source register and an immediate as input with a 1 bit control line
 
-module aluMux (aluOut, memData, ctrl, out);
+module aluMux (aluOut, memData, address, ctrl, out);
 	
-	input ctrl;
-	input [15:0] aluOut, memData;
+	input [1:0] ctrl;
+	input [15:0] aluOut, memData, address;
 	output reg[15:0] out;
 
 always @(ctrl, aluOut, memData)
 begin
 	case (ctrl)
 	
-	1'b0:
+	2'b00:
 		begin
 			out = aluOut;
 		end
 		
-	1'b1:
+	2'b01:
 		begin
 			out = memData;
+		end
+		
+	2'b10:
+		begin
+			out = address;
 		end
 	default: out = aluOut;
 	endcase

@@ -16,11 +16,8 @@ input [9:0] k, curAddr;
 output reg [9:0] nextAddr;
 
 always @(k, curAddr) begin
-	nextAddr = k + curAddr;
+	nextAddr =  curAddr + $signed(k);
 end
 
 
 endmodule
-	
-	
-	 
