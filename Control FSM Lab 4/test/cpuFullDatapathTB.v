@@ -22,8 +22,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 /* These next two lines are there so the compiler gives an acurrate register count. Instead of optimizing.*/ 
-(* keep_hierarchy = "yes" *)
-(* noprune = 1 *)
+//(* keep_hierarchy = "yes" *)
+//(* noprune = 1 *)
 module cpuFullDatapathTB #(parameter INIT_FILE) 
 (clk, rst, r0, r1, r2, r3, r4, r5, r6, r7, r8, 
 		r9, r10, r11, r12, r13, r14, r15, flags, instruction, regEn, address);

@@ -22,8 +22,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 /* These next two lines are there so the compiler gives an acurrate register count. Instead of optimizing.*/ 
-(* keep_hierarchy = "yes" *)
-(* noprune = 1 *)
+//(* keep_hierarchy = "yes" *)
+//(* noprune = 1 *)
 module cpuFullDatapathFPGA #(parameter INIT_FILE = "full_test_memory_init.hex") 
 (clk, rst, segIn1, segIn2, segIn3, segIn4, regEnOut, segAlu1, segAlu2);
 
