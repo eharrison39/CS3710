@@ -116,19 +116,19 @@ module storeTest;
 			//currAddr = address;
 			if(instruction[15:12] == 4'h4 && instruction[7:4] == 4'h4) begin
 				if(currAddr == eVal[i])
-					$display("PASS: Instruction: %04h	|	address = %04h	|	expected = %04h	|	regEn: %04h	|	flags: %05h", 
+					$display("PASS: Instruction: %04h	|	address = %04h	|	expected = %04h	|	regEn: %04h	|	flags: %05b", 
 								instruction, currAddr, eVal[i], currReg, flags);
 				else
-					$display("Fail: Instruction: %04h	|	address = %04h	|	expected = %04h	|	regEn: %04h	|	flags: %05h", 
+					$display("Fail: Instruction: %04h	|	address = %04h	|	expected = %04h	|	regEn: %04h	|	flags: %05b", 
 								instruction, currAddr, eVal[i], currReg, flags);
 			end
 			
 			else begin
 				if(regV[i] == eVal[i])
-					$display("PASS: Instruction: %04h	|	r%0d = %04h	|	expected = %04h	|	regEn: %04h	|	flags: %05h", 
+					$display("PASS: Instruction: %04h	|	r%0d = %04h	|	expected = %04h	|	regEn: %04h	|	flags: %05b", 
 								instruction, regN[i], regV[i], eVal[i], currReg, flags);
 				else
-					$display("Fail: Instruction: %04h	|	r%0d = %04h	|	expected = %04h	|	regEn: %04h	|	flags: %05h", 
+					$display("Fail: Instruction: %04h	|	r%0d = %04h	|	expected = %04h	|	regEn: %04h	|	flags: %05b", 
 								instruction, regN[i], regV[i], eVal[i], currReg, flags);
 			end
 							

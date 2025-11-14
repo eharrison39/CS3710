@@ -98,11 +98,15 @@ always @(*) begin
 		// R-type instruction
 		s3: begin // This is chillin.  It has all the right outputs for an r-type instruction.
 			pcEn = 1'b1;
-			fe = 1'b1;
+			if(decOpcode != 5'h06 && decOpcode != 5'h0f) begin
+				fe = 1'b1;
+			end
 			rsMuxCtrl = decRsMuxCtrl;
 			rdMuxCtrl = decRdMuxCtrl;
 			opcode = decOpcode;
-			regEn = decRegEn;
+			if(decOpcode != 5'h0b) begin
+				regEn = decRegEn;
+			end
 			imm = {8'h00, decImm};
 			ri = decRi;
 		end
