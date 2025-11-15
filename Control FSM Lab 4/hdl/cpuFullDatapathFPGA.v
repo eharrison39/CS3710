@@ -25,11 +25,14 @@
 //(* keep_hierarchy = "yes" *)
 //(* noprune = 1 *)
 module cpuFullDatapathFPGA #(parameter INIT_FILE = "full_test_memory_init.hex") 
-(clk, rst, segIn1, segIn2, segIn3, segIn4, regEnOut, segAlu1, segAlu2);
+(clk, rst, showReg, segIn1, segIn2, segIn3, segIn4, regEnOut, segAlu1, segAlu2);
 
 input wire clk, rst;
+input wire [9:0] showReg;
 output wire [6:0] segIn1, segIn2, segIn3, segIn4, segAlu1, segAlu2;
 output wire [9:0] regEnOut;
+reg[7:0] display;
+
 
 // Control outputs from fsm
  wire [15:0] regEn;
@@ -101,12 +104,56 @@ fsm controlFsm(.clk(clk), .rst(rst), .inop(memOutA), .instruction(instruction), 
 			  .writeEn(memAEn), .lsCtrl(lsCtrl), .aluMuxCtrl(aluMuxCtrl), .pcMuxCtrl(pcMuxCtrl));
 
 assign regEnOut = regEn[9:0];
+
+always @(showReg) begin
+
+	case(showReg)
+		10'b00000_00000: begin
+			display = aluBus[7:0];
+		end
+		10'b00000_00001: begin
+			display = r0[7:0];
+		end
+		10'b00000_00010: begin
+			display = r1[7:0];
+		end
+		10'b00000_00100: begin
+			display = r2[7:0];
+		end
+		10'b00000_01000: begin
+			display = r3[7:0];
+		end
+		10'b00000_10000: begin
+			display = r4[7:0];
+		end
+		10'b00001_00000: begin
+			display = r5[7:0];
+		end
+		10'b00010_00000: begin
+			display = r6[7:0];
+		end
+		10'b00100_00000: begin
+			display = r7[7:0];
+		end
+		10'b01000_00000: begin
+			display = r8[7:0];
+		end
+		10'b10000_00000: begin
+			display = r9[7:0];
+		end
+		
+		default: begin
+			display = aluBus[7:0];
+		end
+	endcase;
+end
+
 bcd_to_sev_seg bcdIn1(instruction[3:0], segIn1);
 bcd_to_sev_seg bcdIn2(instruction[7:4], segIn2);
 bcd_to_sev_seg bcdIn3(instruction[11:8], segIn3);
 bcd_to_sev_seg bcdIn4(instruction[15:12], segIn4);
-bcd_to_sev_seg bcdAlu1(aluBus[3:0], segAlu1);
-bcd_to_sev_seg bcdAlu2(aluBus[7:4], segAlu2);
+bcd_to_sev_seg bcdAlu1(display[3:0], segAlu1);
+bcd_to_sev_seg bcdAlu2(display[7:4], segAlu2);
 
 endmodule
 /**/
