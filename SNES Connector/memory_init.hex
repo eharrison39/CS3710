@@ -1,0 +1,9 @@
+0003      // address 0
+0033      // address 1
+0333      // address 2
+@1FE      // jump to address 510
+3333      // address 510
+1133      // address 511
+1233      // address 512
+3331      // address 513
+@3FF	  // jump to address 1023
