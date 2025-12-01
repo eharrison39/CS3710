@@ -54,9 +54,9 @@ always @(posedge clk) begin
 					state <= s4;
 				else if(inop[15:12] == 4'h4 && inop[7:4] == 4'h0) // If load instruction.
 					state <= s5;
-				else if(inop[15:12] == 4'hc)
+				else if(inop[15:12] == 4'hc)	// If branch instruction.
 					state <= s7;
-				else if(inop[15:12] == 4'h4 && inop[7:4] == 4'h8)
+				else if(inop[15:12] == 4'h4 && inop[7:4] == 4'h8)	// If jump instruction.
 					state <= s8;
 			end
 			s3: state <= s0;

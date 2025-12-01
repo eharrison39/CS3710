@@ -82,13 +82,13 @@ dualPortRam #(.INIT_FILE(INIT_FILE)) ram(.we_a(memAEn), .we_b(memBEn), .clk(clk)
 						  .data_a(srcMuxOut), .data_b(aluBus), .q_a(memOutA), .q_b(memOutB));
 						  
 // Instruction Register
-register instructionReg(.in(memOutA), .regEn(ir), .reset(rst), .clk(clk), .out(instruction));
+(* preserve, keep *)register instructionReg(.in(memOutA), .regEn(ir), .reset(rst), .clk(clk), .out(instruction));
 
 // Program counter jump and branch control
 pcMux pcMux (.one(one), .immDisp({imm[7], imm[7], imm[7:0]}), .rsrcDisp(srcMuxOut[9:0]), .ctrl(pcMuxCtrl), .out(k));					  
 // Program Counter
 pcAdder pcInc (.k(k), .curAddr(pcAddr), .nextAddr(addrA));
-pcReg pcReg (.in(addrA), .pcEn(pcEn), .reset(rst), .clk(clk),.out(pcAddr));
+(* preserve, keep *)pcReg pcReg (.in(addrA), .pcEn(pcEn), .reset(rst), .clk(clk),.out(pcAddr));
 
 
 // Load Store ctrl
