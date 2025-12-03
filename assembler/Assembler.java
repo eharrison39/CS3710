@@ -49,7 +49,7 @@ public class Assembler {
 
         // Generate output file
         try {
-            Files.write(Path.of("output.txt"), hexInstructions);
+            Files.write(Path.of("output.hex"), hexInstructions);
         } catch (IOException e) {
             System.out.println("Error writing to output file: " + e.getMessage());
         }
