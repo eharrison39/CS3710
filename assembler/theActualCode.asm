@@ -45,7 +45,7 @@ cmpi r2, 1
 // bne // Jump to ELSE IF 1
 beq 4 // Jump to MAZE 1
     andi r8, 0
-    addi r8, 188
+    addi r8, 162  // a26 + 162 = 188
     jal r11, r8  // Jump to ELSE IF 1
 // MAZE 1 Addr27
 
@@ -279,7 +279,7 @@ beq 4 // Jump to MAZE 1
 andi r8, 0   // r8 = 0
 addi r8, 2   // r8 = 2
 lshi r8, 8   // r8 = 512
-addi r8, 213   // Address = 725
+addi r8, 26   // Address = 725  a187 + 538 = 725
 jal r11, r8  // Jump to END IF ELSE
 
 // If maze == 2
@@ -288,9 +288,9 @@ cmpi r2, 2
 // bne  // Jump to ELSE IF 2
 beq 6 // Jump to MAZE 2
     andi r8, 0   // r8 = 0
-    addi r8, 1   // r8 = 1
+    addi r8, 0   // r8 = 0
     lshi r8, 8   // r8 = 256
-    addi r8, 161   // Address = 417
+    addi r8, 223   // Address = 417  a194 + 223 = 417
     jal r11, r8  // Jump to ELSE IF 2
 // MAZE 2 Addr195
 // Maze == 2
@@ -610,9 +610,9 @@ beq 6 // Jump to MAZE 2
 // End Maze == 2
 // Jump to end of if else statement
 andi r8, 0   // r8 = 0
-addi r8, 2   // r8 = 2
-lshi r8, 8   // r8 = 512
-addi r8, 213   // Address = 725
+addi r8, 1   // r8 = 1
+lshi r8, 8   // r8 = 256
+addi r8, 53   // Address = 725 a416 + 309 = 725
 jal r11, r8 // Jump to END IF ELSE
 // If maze == 3
 // ELSE IF 2 Addr417
@@ -620,9 +620,9 @@ cmpi r2, 3
 // bne // Jump to ELSE IF 3
 beq 6 // Jump to MAZE 3
     andi r8, 0   // r8 = 0
-    addi r8, 2   // r8 = 2
-    lshi r8, 8   // r8 = 512
-    addi r8, 211   // Address = 723
+    addi r8, 1   // r8 = 1
+    lshi r8, 8   // r8 = 256
+    addi r8, 44   // Address = 723 a423 + 300 = 723
     jal r11, r8 // Jump to ELSE IF 3
 // MAZE 3 Addr424
 // Maze == 3
@@ -1069,7 +1069,7 @@ cmpi r14, 8
 bne 2 // Jump to CHECK DOWN
     subi r1, 1  // Move up by 1
 
-// CHECK DOWN
+// CHECK DOWN Addr731
 // If r15 == 16 then move down (increase y pos)
 andi r14, 0
 addi r14, 16  // r14 = 16
@@ -1078,7 +1078,7 @@ cmpi r14, 16
 bne 2 // Jump to CHECK LEFT
     addi r1, 1  // Move down by 1
 
-// CHECK LEFT
+// CHECK LEFT Addr737
 // If r15 == 32 then move left (decrease x pos)
 andi r14, 0
 addi r14, 32  // r14 = 32
@@ -1087,7 +1087,7 @@ cmpi r14, 32
 bne 2 // Jump to CHECK RIGHT
     subi r0, 1  // Move left by 1
 
-// CHECK RIGHT
+// CHECK RIGHT Addr743
 // If r15 == 64 then move right (increase x pos)
 andi r14, 0
 addi r14, 64  // r14 = 64
@@ -1096,23 +1096,30 @@ cmpi r14, 64
 bne 2 // Jump to CHECK RESET
     addi r0, 1  // Move right by 1
 
-// CHECK RESET
+// CHECK RESET Addr749
 // If r15 == 1 then reset the game
 andi r14, 0
 addi r14, 1  // r14 = 1
 and r14, r15
 cmpi r14, 1
-bne 4  // Jump to END LOOP
-    andi r8, 0
-    addi r8, 7 // Address = 7
+bne 4  // Jump to END LOOP  TODO Make sure this is right
+    andi r8, 0    // r8 = 0
+    addi r8, 253  // r8 = 253
+    lshi r8, 8    // r8 = -768
+    addi r8, 17   // r8 = -751
+    // Address = 7 a758 - 751 = 7
     jal r11, r8 // Jump to GAME RESET
 
 
-// END LOOP
-andi r8, 0
-addi r8, 17 // Address = 17
+// END LOOP Addr759
+andi r8, 0    // r8 = 0
+addi r8, 253  // r8 = 253
+lshi r8, 8    // r8 = -768
+addi r8, 22   // r8 = -746
+// Address = 17 a763 - 746 = 17
 jal r11, r8  // Jump to BEGINNING LOOP
 
+// Addr764
 
 // // beq address x
 // bne 4  // Jump to CONTINUE
