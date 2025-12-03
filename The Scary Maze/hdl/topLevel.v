@@ -42,7 +42,7 @@ wire [7:0] rgb_base;
 
 assign rgb = {rgb_base[7:5], 5'b0, rgb_base[4:2], 5'b0, rgb_base[1:0], 6'b0};
 
-assign rst = ~(r15 == 16'h8004);
+assign rst = ~(r15 == 16'h0004);
 
 vgaClkDiv div (.clk(clk), .rst(rst), .countEn(vga_clk));
 
@@ -52,10 +52,10 @@ vgaController ctrl (.clk(clk), .rst(rst), .countEn(vga_clk), .hSync(hSync), .vSy
 //vgaBitgenMem bitgen (.clk(clk), .pixelData(swc), .bright(bright), .hCount(hCount), .vCount(vCount), .rgb(rgb_base));
 vgaBitgen bitgen (.pixelData(r2[2:0]), .bright(bright), .hCount(hCount), .vCount(vCount), .rgb(rgb_base), .x(r0), .y(r1));
 
-bcd_to_sev_seg bcdAlu1(r0[3:0], segr15a);
-bcd_to_sev_seg bcdAlu2(r0[7:4], segr15b);
-bcd_to_sev_seg bcdAlu3(r0[11:8], segr15c);
-bcd_to_sev_seg bcdAlu4(r0[15:12], segr15d);
+bcd_to_sev_seg bcdAlu1(r15[3:0], segr15a);
+bcd_to_sev_seg bcdAlu2(r15[7:4], segr15b);
+bcd_to_sev_seg bcdAlu3(r15[11:8], segr15c);
+bcd_to_sev_seg bcdAlu4(r15[15:12], segr15d);
 
 // Example: show some buttons on LEDs
 //assign LEDR[15:0] = memOutA;

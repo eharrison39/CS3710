@@ -12,8 +12,8 @@
 
 module pcAdder(k, curAddr, nextAddr);
 
-input [9:0] k, curAddr;
-output reg [9:0] nextAddr;
+input [15:0] k, curAddr;
+output reg [15:0] nextAddr;
 
 always @(k, curAddr) begin
 	nextAddr =  curAddr + $signed(k);

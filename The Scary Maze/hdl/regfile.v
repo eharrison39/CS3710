@@ -39,7 +39,7 @@ module regfile(aluBus, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r1
 (* preserve, keep *)register reg12(aluBus, regEn[12], reset, clk, r12);
 (* preserve, keep *)register reg13(aluBus, regEn[13], reset, clk, r13);
 (* preserve, keep *)register reg14(aluBus, regEn[14], reset, clk, r14);
-(* preserve, keep *)register reg15(snesInput, 1'b1, reset, clk, r15);
+(* preserve, keep *)register reg15({1'b0, snesInput[14:0]}, 1'b1, reset, clk, r15);
  
 
 endmodule

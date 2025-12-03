@@ -5,8 +5,8 @@
 module pcMux (one, immDisp, rsrcDisp, ctrl, out);
 	
 	input [1:0] ctrl;
-	input [9:0] one, immDisp, rsrcDisp;
-	output reg[9:0] out;
+	input [15:0] one, immDisp, rsrcDisp;
+	output reg[15:0] out;
 
 always @(one, immDisp, rsrcDisp, ctrl)
 begin

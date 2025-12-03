@@ -6,8 +6,8 @@
 module addrMux (rdest, pc, ctrl, out);
 	
 	input ctrl;
-	input [9:0] rdest, pc;
-	output reg[9:0] out;
+	input [15:0] rdest, pc;
+	output reg[15:0] out;
 
 always @(ctrl, rdest, pc)
 begin

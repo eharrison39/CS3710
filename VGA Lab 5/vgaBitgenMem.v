@@ -33,7 +33,7 @@ wire [7:0] tile_id;
 dualPortRam #(
     .DATA_WIDTH(8),
     .ADDR_WIDTH(12),
-    .INIT_FILE("maze.hex")
+    .INIT_FILE("mazeLvl1.hex")
 ) tilemap (
     .data_a(8'd0),
     .addr_a(tile_addr_d),

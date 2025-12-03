@@ -18,62 +18,36 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-module vgaDriver(clk, rst, swc, hSync, vSync, rgb, bright, countEn, mov);
+module vgaDriver(clk, rst, swc, hSync, vSync, rgb, bright, vgaClk);
 
 input wire clk, rst;
 input  wire [2:0] swc;
-input wire [3:0] mov;
 output wire [23:0] rgb;
-output wire hSync, vSync, bright, countEn;
+output wire hSync, vSync, bright, vgaClk;
 
 wire [9:0] hCount, vCount;
-wire [2:0] rgb_base;
+wire [7:0] bgColor, q;
+wire [7:0] rgb_base;
+wire [13:0] glyphAddr;
+wire pixEn;
 
-reg [15:0] x, y;
-reg [2:0] swc_prev = 0;
-always @(posedge clk or negedge rst) begin
-	if(~rst) begin
-		case (swc)
-           3'b001: begin x <= 600; y <= 440; end
-           3'b010: begin x <= 335; y <= 460; end
-           3'b011: begin x <= 320; y <= 460; end
-           default: begin x <= 0;   y <= 0;   end
-       endcase
-	end
-   // Only update x,y when swc CHANGES
-   else if(swc != swc_prev) begin
-       case (swc)
-           3'b001: begin x <= 600; y <= 440; end
-           3'b010: begin x <= 335; y <= 460; end
-           3'b011: begin x <= 320; y <= 460; end
-           default: begin x <= 0;   y <= 0;   end
-       endcase
-       
-       swc_prev <= swc;   // update stored value
-   end
-   else begin
-		// Movement logic (always active)
-		case (mov)
-			 4'b1110: x <= x + 1;
-			 4'b1101: x <= x - 1;
-			 4'b1011: y <= y - 1;
-			 4'b0111: y <= y + 1;
-			 default: ;
-		endcase
-	end
-end
+wire [2:0] glyphX = hCount[2:0];
+wire [7:0] pixelRow = q;   // from glyph ROM
 
-			
-	
 
-assign rgb = {rgb_base[2], 7'b0, rgb_base[1], 7'b0, rgb_base[0], 7'b0};
+assign rgb = {rgb_base[7:5], 5'b0, rgb_base[4:2], 5'b0, rgb_base[1:0], 6'b0};
 
-vgaClkDiv div (.clk(clk), .rst(rst), .countEn(countEn));
+vgaAddress addr(.clk(clk), .bright(bright), .hCount(hCount), .vCount(vCount), 
+									.bgColor(bgColor), .glyphAddr(glyphAddr), .pixEn(pixEn));
+vgaGlyphRom glyph(.clk(clk), .address(glyphAddr), .q(q))
 
-vgaController ctrl (.clk(clk), .rst(rst), .countEn(countEn), .hSync(hSync), .vSync(vSync), 
+vgaClkDiv div (.clk(clk), .rst(rst), .countEn(vgaClk));
+
+vgaController ctrl (.clk(clk), .rst(rst), .countEn(vgaClk), .hSync(hSync), .vSync(vSync), 
 														.bright(bright), .hCount(hCount), .vCount(vCount));
 									
 //vgaBitgenMem bitgen (.clk(clk), .pixelData(swc), .bright(bright), .hCount(hCount), .vCount(vCount), .rgb(rgb_base));
-vgaBitgen bitgen (.pixelData(swc), .bright(bright), .hCount(hCount), .vCount(vCount), .rgb(rgb_base), .x(x), .y(y));
+vgaBitgen bitgen (.bgColor(bgColor), .pixelData(swc), .pixEn(pixEn), .glyphX(glyphX), .pixelRow(pixelRow),
+						.bright(bright), .hCount(hCount), .vCount(vCount), .rgb(rgb_base));
 
 endmodule
