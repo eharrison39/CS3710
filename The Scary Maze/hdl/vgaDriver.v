@@ -18,11 +18,10 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-module vgaDriver(clk, rst, swc, hSync, vSync, rgb, bright, countEn, mov);
+module vgaDriver(clk, rst, swc, hSync, vSync, rgb, bright, countEn);
 
 input wire clk, rst;
 input  wire [2:0] swc;
-input wire [3:0] mov;
 output wire [23:0] rgb;
 output wire hSync, vSync, bright, countEn;
 
@@ -31,40 +30,7 @@ wire [2:0] rgb_base;
 
 reg [15:0] x, y;
 reg [2:0] swc_prev = 0;
-always @(posedge clk or negedge rst) begin
-	if(~rst) begin
-		case (swc)
-           3'b001: begin x <= 600; y <= 440; end
-           3'b010: begin x <= 335; y <= 460; end
-           3'b011: begin x <= 320; y <= 460; end
-           default: begin x <= 0;   y <= 0;   end
-       endcase
-	end
-   // Only update x,y when swc CHANGES
-   else if(swc != swc_prev) begin
-       case (swc)
-           3'b001: begin x <= 600; y <= 440; end
-           3'b010: begin x <= 335; y <= 460; end
-           3'b011: begin x <= 320; y <= 460; end
-           default: begin x <= 0;   y <= 0;   end
-       endcase
-       
-       swc_prev <= swc;   // update stored value
-   end
-   else begin
-		// Movement logic (always active)
-		case (mov)
-			 4'b1110: x <= x + 1;
-			 4'b1101: x <= x - 1;
-			 4'b1011: y <= y - 1;
-			 4'b0111: y <= y + 1;
-			 default: ;
-		endcase
-	end
-end
 
-			
-	
 
 assign rgb = {rgb_base[2], 7'b0, rgb_base[1], 7'b0, rgb_base[0], 7'b0};
 

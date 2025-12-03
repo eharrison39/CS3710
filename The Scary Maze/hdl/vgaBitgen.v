@@ -23,14 +23,14 @@ module vgaBitgen(bright, pixelData, hCount, vCount, rgb, x, y);
 input bright;
 input [2:0] pixelData;
 input [9:0] hCount, vCount;
-input [15:0] x, y;
+input wire[15:0] x, y;
 
-output reg [2:0] rgb;
+output reg [7:0] rgb;
 
 
-parameter black = 3'b000;
-parameter blue = 3'b001, green = 3'b010, cyan = 3'b011, red = 3'b100, magenta = 3'b101, yellow = 3'b110;
-parameter white = 3'b111;
+parameter black = 8'b0000_0000;
+parameter blue = 8'b0000_0011, green = 8'b0001_1100, cyan = 8'b0001_1111, red = 8'b1110_0000, magenta = 8'b1110_0011, yellow = 8'b1111_1100;
+parameter white = 8'b1111_1111;
 
 always @(*) begin
 	if(~bright)
@@ -41,9 +41,9 @@ always @(*) begin
 	  rgb = black;
 
 		// draw the red square centered at (x,y) with +/-5 pixel radius
-	   if ((hCount >= x - 2) && (hCount <= x + 2) &&
-			  (vCount >= y - 2) && (vCount <= y + 2)) begin
-			 rgb = black;
+	   if ((hCount >= x - 5) && (hCount <= x + 5) &&
+			  (vCount >= y - 5) && (vCount <= y + 5)) begin
+			 rgb = cyan;
 	   end
 		else begin
 			case (pixelData)
