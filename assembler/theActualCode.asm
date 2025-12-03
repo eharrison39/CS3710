@@ -4,6 +4,8 @@
 // Level 2 (350, 460)
 // Level 3 (320, 460)
 
+// THE BEGINNING Addr0
+
 // Set fixed memory addresses
 andi r3, 0  // Set x pos address
 addi r3, 200
@@ -30,9 +32,9 @@ addi r2, 1
 
 // BEGINNING LOOP Addr17
 // Stor initial values in memory
-stor r0, r3  // Stor x pos
-stor r1, r4  // Stor y pos
-stor r2, r5  // Stor maze level
+andi r3, 0  // Stor x pos
+andi r4, 0  // Stor y pos
+andi r5, 0  // Stor maze level
 
 // If r15 == 0 then jump to BEGINNING LOOP
 cmpi r15, 0
@@ -44,7 +46,7 @@ cmpi r2, 1
 beq 4 // Jump to MAZE 1
     andi r8, 0
     addi r8, 188
-    jal r7, r8  // Jump to ELSE IF 1
+    jal r11, r8  // Jump to ELSE IF 1
 // MAZE 1 Addr27
 
 // Maze == 1
