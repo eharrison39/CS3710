@@ -41,8 +41,10 @@ wire [11:0] tile_addr = tile_y * MAP_W + tile_x;
 
 
 always @(posedge clk) begin
-		pixEn <= bright;
-		bgColor <= 8'h00;
-		glyphAddr <= tile_addr * 8 + glyph_y;
+	pixEn <= bright;
+	bgColor <= 8'h00;
+	glyphAddr <= tile_addr * 8 + glyph_y;
+end
+
 endmodule
 

@@ -39,7 +39,7 @@ assign rgb = {rgb_base[7:5], 5'b0, rgb_base[4:2], 5'b0, rgb_base[1:0], 6'b0};
 
 vgaAddress addr(.clk(clk), .bright(bright), .hCount(hCount), .vCount(vCount), 
 									.bgColor(bgColor), .glyphAddr(glyphAddr), .pixEn(pixEn));
-vgaGlyphRom glyph(.clk(clk), .address(glyphAddr), .q(q))
+vgaGlyphRom glyph(.clk(clk), .address(glyphAddr), .q(q));
 
 vgaClkDiv div (.clk(clk), .rst(rst), .countEn(vgaClk));
 

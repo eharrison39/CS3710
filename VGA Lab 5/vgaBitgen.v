@@ -211,7 +211,7 @@ always @(*) begin
 				end
 				
 				3'b100: begin
-					rgb = pixel ? 8'hFF : bg_color;
+					rgb = pixel ? 8'hFF : bgColor;
 				end
 					
 				default rgb = black;

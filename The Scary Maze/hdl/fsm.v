@@ -28,7 +28,7 @@ output reg fe, ri, pcEn, ir, writeEn, lsCtrl;
 
 reg [3:0]  state;
 parameter [3:0] s0 = 4'b0000, s1 = 4'b0001, s2 = 4'b0010, s3 = 4'b0011, 
-					 s4 = 4'b0100, s5 = 4'b0101, s6 = 4'b0110, s7 = 4'b0111, s8 = 4'b1000;
+					 s4 = 4'b0100, s5 = 4'b0101, s6 = 4'b0110, s7 = 4'b0111, s8 = 4'b1000, halt = 4'b1001;
 
 // Instantiate decoder
 wire [3:0] decRsMuxCtrl, decRdMuxCtrl;
@@ -39,9 +39,12 @@ wire decRi;
 
 decoder theDecoder(instruction, decRsMuxCtrl, decRdMuxCtrl, decOpcode, decRegEn, decImm, decRi);
 
+reg [22:0] halt_counter;  // enough bits to count 0.2s at 50 MHz
+localparam HALT_COUNT = 50_000_000 / 5;
+
 always @(posedge clk) begin
 
-	if(~rst || inop == 16'h0000)
+	if(~rst	|| inop == 16'h0000)
 		state <= s0;
 	else
 		case(state)
