@@ -20,7 +20,7 @@ public class Assembler {
         // Read Input File
         Scanner scanner;
         try {
-            File file = new File("theActualCode.asm");
+            File file = new File("theCodeWithStates.asm");
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
             System.out.println("Sorry boss!  File not found!");

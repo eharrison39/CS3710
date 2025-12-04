@@ -38,6 +38,8 @@ andi r5, 0  // Stor maze level
 
 // If r15 == 0 then jump to BEGINNING LOOP
 cmpi r15, 0
+bne 3   // CHANGE
+andi r12, 0  // CHANGE
 beq -4  // Jump to BEGINNING LOOP
 
 // If maze == 1
@@ -45,9 +47,9 @@ cmpi r2, 1
 // bne // Jump to ELSE IF 1
 beq 4 // Jump to MAZE 1
     andi r8, 0
-    addi r8, 162  // a26 + 162 = 188
+    addi r8, 162  // a28 + 162 = 190
     jal r11, r8  // Jump to ELSE IF 1
-// MAZE 1 Addr27
+// MAZE 1 Addr29
 
 // Maze == 1
     // if r1 >= 310 && r1 <= 620 && r0 >= 100 && r0 <= 120
@@ -71,7 +73,7 @@ beq 4 // Jump to MAZE 1
     cmpi r9, 0
     beq 17 // Jump to SEND IF ELSE 1
 
-    // ELSE IF 1.1 Addr42
+    // ELSE IF 1.1 Addr44
     // else if r1 >= 320 && r1 <= 330 && r0 >= 120 && r0 <= 200
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -93,10 +95,10 @@ beq 4 // Jump to MAZE 1
     bgt 3 // Jump to ELSE IF 1.2
 
     cmpi r9, 0
-    // SEND IF ELSE 1 Addr58
+    // SEND IF ELSE 1 Addr60
     beq 125 // Jump to END IF ELSE 1
 
-    // ELSE IF 1.2 Addr59
+    // ELSE IF 1.2 Addr61
     // else if r1 >= 310 && r1 <= 650 && r0 >= 200 && r0 <= 230
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -122,7 +124,7 @@ beq 4 // Jump to MAZE 1
     cmpi r9, 0
     beq 106 // Jump to END IF ELSE 1
 
-    // ELSE IF 1.3 Addr78
+    // ELSE IF 1.3 Addr80
     // else if r1 >= 630 && r1 <= 650 && r0 >= 230 && r0 <= 300
     andi r6, 0    // r6 = 0
     addi r6, 2    // r6 = 2
@@ -147,7 +149,7 @@ beq 4 // Jump to MAZE 1
     cmpi r9, 0
     beq 88 // Jump to END IF ELSE 1
 
-    // ELSE IF 1.4 Addr96
+    // ELSE IF 1.4 Addr98
     // else if r1 >= 310 && r1 <= 650 && r0 >= 300 && r0 <= 350
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -174,7 +176,7 @@ beq 4 // Jump to MAZE 1
     cmpi r9, 0
     beq 68 // Jump to END IF ELSE 1
 
-    // ELSE IF 1.5 Addr116
+    // ELSE IF 1.5 Addr118
     // else if r1 >= 310 && r1 <= 340 && r0 >= 350 && r0 <= 400
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -198,7 +200,7 @@ beq 4 // Jump to MAZE 1
     cmpi r9, 0
     beq 51 // Jump to END IF ELSE 1
 
-    // ELSE IF 1.6 Addr133
+    // ELSE IF 1.6 Addr135
     // else if r1 >= 310 && r1 <= 650 && r0 >= 400 && r0 <= 480
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -223,7 +225,7 @@ beq 4 // Jump to MAZE 1
     cmpi r9, 0
     beq 33 // Jump to END IF ELSE 1
 
-    // ELSE IF 1.7 Addr151
+    // ELSE IF 1.7 Addr153
     // else if r1 >= 620 && r1 <= 650 && r0 >= 100 && r0 <= 120 then you WIN
     andi r6, 0    // r6 = 0
     addi r6, 2    // r6 = 2
@@ -259,7 +261,7 @@ beq 4 // Jump to MAZE 1
     cmpi r9, 0
     beq 9 // Jump to END IF ELSE 1
 
-    // ELSE DEAD 1 Addr175
+    // ELSE DEAD 1 Addr177
     // else you die
     // Update x for level 1
     andi r0, 0   // x = 0
@@ -273,26 +275,26 @@ beq 4 // Jump to MAZE 1
     lshi r1, 8   // y = 256
     addi r1, 184 // y = 440
 
-    // END IF ELSE 1 Addr183
+    // END IF ELSE 1 Addr185
 // End Maze == 1
 // Jump to end of if else statement
 andi r8, 0   // r8 = 0
 addi r8, 2   // r8 = 2
 lshi r8, 8   // r8 = 512
-addi r8, 26   // Address = 725  a187 + 538 = 725
+addi r8, 26   // Address = 727  a189 + 538 = 727
 jal r11, r8  // Jump to END IF ELSE
 
 // If maze == 2
-// ELSE IF 1 Addr188
+// ELSE IF 1 Addr190
 cmpi r2, 2
 // bne  // Jump to ELSE IF 2
 beq 6 // Jump to MAZE 2
     andi r8, 0   // r8 = 0
     addi r8, 0   // r8 = 0
     lshi r8, 8   // r8 = 256
-    addi r8, 223   // Address = 417  a194 + 223 = 417
+    addi r8, 223   // Address = 419  a196 + 223 = 419
     jal r11, r8  // Jump to ELSE IF 2
-// MAZE 2 Addr195
+// MAZE 2 Addr197
 // Maze == 2
     // if r1 >= 310 && r1 <= 380 && r0 >= 150 && r0 <= 480
     andi r6, 0    // r6 = 0
@@ -318,7 +320,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 85 // Jump to SEND IF ELSE 2
 
-    // ELSE IF 2.1 Addr213
+    // ELSE IF 2.1 Addr215
     // else if r1 >= 310 && r1 <= 350 && r0 >= 120 && r0 <= 150
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -342,7 +344,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 68 // Jump to SEND IF ELSE 2
 
-    // ELSE IF 2.2 Addr230
+    // ELSE IF 2.2 Addr232
     // else if r1 >= 310 && r1 <= 410 && r0 >= 100 && r0 <= 120
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -364,7 +366,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 53 // Jump to SEND IF ELSE 2
 
-    // ELSE IF 2.3 Addr245
+    // ELSE IF 2.3 Addr247
     // else if r1 >= 410 && r1 <= 460 && r0 >= 100 && r0 <= 150
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -388,7 +390,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 36 // Jump to SEND IF ELSE 2
 
-    // ELSE IF 2.4 Addr262
+    // ELSE IF 2.4 Addr264
     // else if r1 >= 430 && r1 <= 480 && r0 >= 150 && r0 <= 200
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -413,7 +415,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 18 // Jump to SEND IF ELSE 2
 
-    // ELSE IF 2.5 Addr280
+    // ELSE IF 2.5 Addr282
     // else if r1 >= 450 && r1 <= 510 && r0 >= 200 && r0 <= 480
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -436,10 +438,10 @@ beq 6 // Jump to MAZE 2
     bgt 3 // Jump to ELSE IF 2.6
 
     cmpi r9, 0
-    // SEND IF ELSE 2 Addr297
+    // SEND IF ELSE 2 Addr299
     beq 115 // Jump to END IF ELSE 2
 
-    // ELSE IF 2.6 Addr298
+    // ELSE IF 2.6 Addr300
     // else if r1 >= 510 && r1 <= 640 && r0 >= 450 && r0 <= 480
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -463,7 +465,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 98 // Jump to END IF ELSE 2
 
-    // ELSE IF 2.7 Addr315
+    // ELSE IF 2.7 Addr317
     // else if r1 >= 620 && r1 <= 640 && r0 >= 140 && r0 <= 480
     andi r6, 0    // r6 = 0
     addi r6, 2    // r6 = 2
@@ -488,7 +490,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 80 // Jump to END IF ELSE 2
 
-    // ELSE IF 2.8 Addr333
+    // ELSE IF 2.8 Addr335
     // else if r1 >= 510 && r1 <= 640 && r0 >= 120 && r0 <= 140
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -512,7 +514,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 63 // Jump to END IF ELSE 2
 
-    // ELSE IF 2.9 Addr350
+    // ELSE IF 2.9 Addr352
     // else if r1 >= 510 && r1 <= 520 && r0 >= 100 && r0 <= 120
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -534,7 +536,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 48 // Jump to END IF ELSE 2
 
-    // ELSE IF 2.10 Addr365
+    // ELSE IF 2.10 Addr367
     // else if r1 >= 520 && r1 <= 640 && r0 >= 100 && r0 <= 110
     
     andi r6, 0    // r6 = 0
@@ -557,7 +559,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 33 // Jump to END IF ELSE 2
 
-    // ELSE IF 2.11 Addr380
+    // ELSE IF 2.11 Addr382
     // else if r1 >= 640 && r1 <= 650 && r0 >= 100 && r0 <= 110 then You Win
     andi r6, 0    // r6 = 0
     addi r6, 2    // r6 = 2
@@ -593,7 +595,7 @@ beq 6 // Jump to MAZE 2
     cmpi r9, 0
     beq 9 // Jump to END IF ELSE 2
 
-    // ELSE DEAD 2 Addr404
+    // ELSE DEAD 2 Addr406
     // else you die reset x and y positions
     // Update x for level 2
     andi r0, 0   // x = 0
@@ -606,25 +608,25 @@ beq 6 // Jump to MAZE 2
     addi r1, 1   // y = 1
     lshi r1, 8   // y = 256
     addi r1, 204 // y = 460
-    // END IF ELSE 2 Addr412
+    // END IF ELSE 2 Addr414
 // End Maze == 2
 // Jump to end of if else statement
 andi r8, 0   // r8 = 0
 addi r8, 1   // r8 = 1
 lshi r8, 8   // r8 = 256
-addi r8, 53   // Address = 725 a416 + 309 = 725
+addi r8, 53   // Address = 727 a418 + 309 = 727
 jal r11, r8 // Jump to END IF ELSE
 // If maze == 3
-// ELSE IF 2 Addr417
+// ELSE IF 2 Addr419
 cmpi r2, 3
 // bne // Jump to ELSE IF 3
 beq 6 // Jump to MAZE 3
     andi r8, 0   // r8 = 0
     addi r8, 1   // r8 = 1
     lshi r8, 8   // r8 = 256
-    addi r8, 44   // Address = 723 a423 + 300 = 723
+    addi r8, 44   // Address = 725 a425 + 300 = 725
     jal r11, r8 // Jump to ELSE IF 3
-// MAZE 3 Addr424
+// MAZE 3 Addr426
 // Maze == 3
     // if r1 >= 310 && r1 <= 650 && r0 >= 440 && r0 <= 480
     andi r6, 0    // r6 = 0
@@ -650,7 +652,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 35 // Jump to 2SEND IF ELSE 3
 
-    // ELSE IF 3.1 Addr442
+    // ELSE IF 3.1 Addr444
     // else if r1 >= 620 && r1 <= 650 && r0 >= 380 && r0 <= 440
     
     andi r6, 0    // r6 = 0
@@ -676,7 +678,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 17 // Jump to 2SEND IF ELSE 3
 
-    // ELSE IF 3.2 Addr460
+    // ELSE IF 3.2 Addr462
     // else if r1 >= 310 && r1 <= 620 && r0 >= 380 && r0 <= 410
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -698,10 +700,10 @@ beq 6 // Jump to MAZE 3
     bgt 3 // Jump to ELSE IF 3.3
 
     cmpi r9, 0
-    // 2SEND IF ELSE 3 Addr476
+    // 2SEND IF ELSE 3 Addr478
     beq 125 // Jump to SEND IF ELSE 3
 
-    // ELSE IF 3.3 Addr477
+    // ELSE IF 3.3 Addr479
     // else if r1 >= 310 && r1 <= 330 && r0 >= 100 && r0 <= 380
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -724,7 +726,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 109 // Jump to SEND IF ELSE 3
 
-    // ELSE IF 3.4 Addr493
+    // ELSE IF 3.4 Addr495
     // else if r1 >= 330 && r1 <= 650 && r0 >= 100 && r0 <= 150
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -749,7 +751,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 91 // Jump to SEND IF ELSE 3
 
-    // ELSE IF 3.5 Addr511
+    // ELSE IF 3.5 Addr513
     // else if r1 >= 620 && r1 <= 650 && r0 >= 150 && r0 <= 350
     andi r6, 0    // r6 = 0
     addi r6, 2    // r6 = 2
@@ -774,7 +776,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 73 // Jump to SEND IF ELSE 3
 
-    // ELSE IF 3.6 Addr529
+    // ELSE IF 3.6 Addr531
     // else if r1 >= 360 && r1 <= 620 && r0 >= 320 && r0 <= 350
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -800,7 +802,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 54 // Jump to SEND IF ELSE 3
 
-    // ELSE IF 3.7 Addr548
+    // ELSE IF 3.7 Addr550
     // else if r1 >= 360 && r1 <= 380 && r0 >= 170 && r0 <= 320
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -825,7 +827,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 36 // Jump to SEND IF ELSE 3
 
-    // ELSE IF 3.8 Addr566
+    // ELSE IF 3.8 Addr568
     // else if r1 >= 380 && r1 <= 600 && r0 >= 170 && r0 <= 180
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -850,7 +852,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 18 // Jump to SEND IF ELSE 3
 
-    // ELSE IF 3.9 Addr584
+    // ELSE IF 3.9 Addr586
     // else if r1 >= 585 && r1 <= 600 && r0 >= 180 && r0 <= 300
     andi r6, 0    // r6 = 0
     addi r6, 2    // r6 = 2
@@ -873,10 +875,10 @@ beq 6 // Jump to MAZE 3
     bgt 3 // Jump to ELSE IF 3.10
 
     cmpi r9, 0
-    // SEND IF ELSE 3 Addr601
+    // SEND IF ELSE 3 Addr603
     beq 120 // Jump to END IF ELSE 3
 
-    // ELSE IF 3.10 Addr602
+    // ELSE IF 3.10 Addr604
     // else if r1 >= 390 && r1 <= 585 && r0 >= 290 && r0 <= 300
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -902,7 +904,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 101 // Jump to END IF ELSE 3
 
-    // ELSE IF 3.11 Addr621
+    // ELSE IF 3.11 Addr623
     // else if r1 >= 390 && r1 <= 395 && r0 >= 200 && r0 <= 290
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -926,7 +928,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 84 // Jump to END IF ELSE 3
 
-    // ELSE IF 3.12 Addr638
+    // ELSE IF 3.12 Addr640
     // else if r1 >= 395 && r1 <= 500 && r0 >= 200 && r0 <= 205
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -951,7 +953,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 66 // Jump to END IF ELSE 3
 
-    // ELSE IF 3.13 Addr656
+    // ELSE IF 3.13 Addr658
     // else if r1 >= 495 && r1 <= 500 && r0 >= 205 && r0 <= 270
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -976,7 +978,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 48 // Jump to END IF ELSE 3
 
-    // ELSE IF 3.14 Addr674
+    // ELSE IF 3.14 Addr676
     // else if r1 >= 500 && r1 <= 540 && r0 >= 267 && r0 <= 270
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
@@ -1002,7 +1004,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 29 // Jump to END IF ELSE 3
 
-    // ELSE IF 3.15 Addr693
+    // ELSE IF 3.15 Addr695
     // else if r1 >= 540 && r1 <= 560 && r0 >= 267 && r0 <= 270 then You Win
     andi r6, 0    // r6 = 0
     addi r6, 2    // r6 = 2
@@ -1031,7 +1033,7 @@ beq 6 // Jump to MAZE 3
     cmpi r9, 0
     beq 9 // Jump to END IF ELSE 3
 
-    // ELSE DEAD 3 Addr713
+    // ELSE DEAD 3 Addr715
     // else you die reset x and y positions
     // Update x for level 3
     andi r0, 0   // x = 0
@@ -1044,13 +1046,13 @@ beq 6 // Jump to MAZE 3
     addi r1, 1   // y = 1
     lshi r1, 8   // y = 256
     addi r1, 204 // y = 460
-    // END IF ELSE 3 Addr721
+    // END IF ELSE 3 Addr723
 // End Maze == 3
 // Jump to end of if else statement
 cmpi r9, 0
 beq 3 // Jump to END IF ELSE
 // If maze == 4
-// ELSE IF 3 Addr723
+// ELSE IF 3 Addr725
 // Jump to end of if else
 cmpi r2, 4
 bne 1 // Jump to END IF ELSE
@@ -1058,7 +1060,7 @@ bne 1 // Jump to END IF ELSE
     // Do nothing.  Showing scarry girl.
 // End Maze == 4
 
-// END IF ELSE Addr725
+// END IF ELSE Addr727
 // Now we need to update the x and y positions based on input
 
 // If r15 == 8 then move up (decrease y pos)
@@ -1066,59 +1068,71 @@ andi r14, 0
 addi r14, 8  // r14 = 8
 and r14, r15
 cmpi r14, 8
-bne 2 // Jump to CHECK DOWN
+bne 5 // Jump to CHECK DOWN
+    cmpi r12, 0  // CHANGE
+    bne 3        // CHANGE
     subi r1, 1  // Move up by 1
+    addi r12, 1  // Set state to 1 // CHANGE
 
-// CHECK DOWN Addr731
+// CHECK DOWN Addr736
 // If r15 == 16 then move down (increase y pos)
 andi r14, 0
 addi r14, 16  // r14 = 16
 and r14, r15
 cmpi r14, 16
-bne 2 // Jump to CHECK LEFT
+bne 5 // Jump to CHECK LEFT
+    cmpi r12, 0  // CHANGE
+    bne 3        // CHANGE
     addi r1, 1  // Move down by 1
+    addi r12, 1  // Set state to 1 // CHANGE
 
-// CHECK LEFT Addr737
+// CHECK LEFT Addr745
 // If r15 == 32 then move left (decrease x pos)
 andi r14, 0
 addi r14, 32  // r14 = 32
 and r14, r15
 cmpi r14, 32
-bne 2 // Jump to CHECK RIGHT
+bne 5 // Jump to CHECK RIGHT
+    cmpi r12, 0  // CHANGE
+    bne 3        // CHANGE
     subi r0, 1  // Move left by 1
+    addi r12, 1  // Set state to 1 // CHANGE
 
-// CHECK RIGHT Addr743
+// CHECK RIGHT Addr754
 // If r15 == 64 then move right (increase x pos)
 andi r14, 0
 addi r14, 64  // r14 = 64
 and r14, r15
 cmpi r14, 64
-bne 2 // Jump to CHECK RESET
+bne 5 // Jump to CHECK RESET
+    cmpi r12, 0  // CHANGE
+    bne 3        // CHANGE
     addi r0, 1  // Move right by 1
+    addi r12, 1  // Set state to 1 // CHANGE
 
-// CHECK RESET Addr749
+// CHECK RESET Addr763
 // If r15 == 1 then reset the game
 andi r14, 0
 addi r14, 1  // r14 = 1
 and r14, r15
 cmpi r14, 1
-bne 4  // Jump to END LOOP  TODO Make sure this is right
+bne 6  // Jump to END LOOP
     andi r8, 0    // r8 = 0
     addi r8, 253  // r8 = 253
     lshi r8, 8    // r8 = -768
-    addi r8, 17   // r8 = -751
-    // Address = 7 a758 - 751 = 7
+    addi r8, 3   // r8 = -765
+    // Address = 7 a772 - 765 = 7
     jal r11, r8 // Jump to GAME RESET
 
-// END LOOP Addr759
+// END LOOP Addr773
 andi r8, 0    // r8 = 0
 addi r8, 253  // r8 = 253
 lshi r8, 8    // r8 = -768
-addi r8, 22   // r8 = -746
-// Address = 17 a763 - 746 = 17
+addi r8, 8   // r8 = -760
+// Address = 17 a777 - 760 = 17
 jal r11, r8  // Jump to BEGINNING LOOP
 
-// Addr764
+// Addr778
 
 // // beq address x
 // bne 4  // Jump to CONTINUE
