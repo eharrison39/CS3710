@@ -28,7 +28,17 @@ output reg fe, ri, pcEn, ir, writeEn, lsCtrl;
 
 reg [3:0]  state;
 parameter [3:0] s0 = 4'b0000, s1 = 4'b0001, s2 = 4'b0010, s3 = 4'b0011, 
-					 s4 = 4'b0100, s5 = 4'b0101, s6 = 4'b0110, s7 = 4'b0111, s8 = 4'b1000, halt = 4'b1001;
+					 s4 = 4'b0100, s5 = 4'b0101, s6 = 4'b0110, s7 = 4'b0111, s8 = 4'b1000;
+					 
+parameter AND = 5'b0_0001;
+parameter OR = 5'b0_0010;
+parameter XOR = 5'b0_0011;
+parameter NOT = 5'b0_0100;
+
+// Shifting Opcodes
+parameter LSH = 5'b1_1100;
+parameter RSH = 5'b1_0011 ;
+parameter ARSH = 5'b1_0111 ;
 
 // Instantiate decoder
 wire [3:0] decRsMuxCtrl, decRdMuxCtrl;
@@ -38,9 +48,6 @@ wire [7:0] decImm;
 wire decRi;
 
 decoder theDecoder(instruction, decRsMuxCtrl, decRdMuxCtrl, decOpcode, decRegEn, decImm, decRi);
-
-reg [22:0] halt_counter;  // enough bits to count 0.2s at 50 MHz
-localparam HALT_COUNT = 50_000_000 / 5;
 
 always @(posedge clk) begin
 
@@ -101,7 +108,9 @@ always @(*) begin
 		// R-type instruction
 		s3: begin // This is chillin.  It has all the right outputs for an r-type instruction.
 			pcEn = 1'b1;
-			if(decOpcode != 5'h06 && decOpcode != 5'h0f && decOpcode != 5'h00) begin
+			if(decOpcode != 5'h06 && decOpcode != 5'h0f && decOpcode != 5'h00 && 
+				decOpcode != AND && decOpcode != OR && decOpcode != XOR && decOpcode != NOT && 
+				decOpcode != LSH && decOpcode != RSH && decOpcode != ARSH) begin
 				fe = 1'b1;
 			end
 			rsMuxCtrl = decRsMuxCtrl;
@@ -140,18 +149,18 @@ always @(*) begin
 			case (decRdMuxCtrl)
 				4'b0000: pcMuxCtrl = {1'b0, flags[1]};					// Equal, 		Z = 1
 				4'b0001: pcMuxCtrl = {1'b0, ~flags[1]};				// Not Equal	Z = 0
-				4'b1101: pcMuxCtrl = {1'b0, flags[1] | flags[0]};	// Great or E	N = 1 or Z = 1	
+				4'b1101: pcMuxCtrl = {1'b0, flags[1] | ~flags[0]};	// Great or E	N = 1 or Z = 1	
 				4'b0010: pcMuxCtrl = {1'b0, flags[4]};					// Carry Set	C = 1
 				4'b0011: pcMuxCtrl = {1'b0, ~flags[4]};				// Carry Clear	C = 0
-				4'b0100: pcMuxCtrl = {1'b0, flags[3]};					// Higher		L = 1
-				4'b0101: pcMuxCtrl = {1'b0, ~flags[3]};				// Lower or E	L = 0
-				4'b1010: pcMuxCtrl = {1'b0, ~flags[3] & ~flags[1]};// Lower than	L = 0 and Z = 0
+				4'b0100: pcMuxCtrl = {1'b0, ~flags[3]};					// Higher		L = 1
+				4'b0101: pcMuxCtrl = {1'b0, flags[3]};				// Lower or E	L = 1
+				4'b1010: pcMuxCtrl = {1'b0, flags[3] & ~flags[1]};// Lower than	L = 1 and Z = 0
 				4'b1011: pcMuxCtrl = {1'b0, flags[3] | flags[1]};	// Higher or E	L = 1 or Z = 1
-				4'b0110: pcMuxCtrl = {1'b0, flags[0]};					// Greater		N = 1
+				4'b0110: pcMuxCtrl = {1'b0, ~flags[0]};				// Greater		N = 1
 				4'b0111: pcMuxCtrl = {1'b0, ~flags[0]};				// Less or E	N = 0
 				4'b1000: pcMuxCtrl = {1'b0, flags[2]};					// Flag Set		F = 1
 				4'b1001: pcMuxCtrl = {1'b0, ~flags[2]};				// Flag Clear	F = 0
-				4'b1100: pcMuxCtrl = {1'b0, ~flags[0] & ~flags[1]};// Less Than	N = 0 and Z = 0
+				4'b1100: pcMuxCtrl = {1'b0, flags[0] & ~flags[1]}; // Less Than	N = 1 and Z = 0
 				4'b1110: pcMuxCtrl = 2'b01;								// Unconditional Jump	N/A
 				4'b1111: pcMuxCtrl = 2'b00;								// Never Jump				N/A
 			endcase

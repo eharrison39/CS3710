@@ -19,11 +19,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module vgaAddress(clk, bright, hCount, vCount, bgColor, glyphAddr, pixEn);
+module vgaAddress(clk, bright, hCount, vCount, charcode, bgColor, glyphAddr, pixEn);
 
 input clk, bright;
 input [9:0] hCount, vCount;
-
+input wire [7:0] charcode;
 output reg [7:0] bgColor;
 output reg [13:0] glyphAddr;
 output reg pixEn;
@@ -42,8 +42,8 @@ wire [11:0] tile_addr = tile_y * MAP_W + tile_x;
 
 always @(posedge clk) begin
 	pixEn <= bright;
-	bgColor <= 8'h00;
-	glyphAddr <= tile_addr * 8 + glyph_y;
+	bgColor <= 8'h18;
+	glyphAddr <= {charcode, 3'b000} + glyph_y;
 end
 
 endmodule

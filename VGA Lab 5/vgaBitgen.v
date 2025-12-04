@@ -18,24 +18,22 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-module vgaBitgen(bright, pixelData, bgColor, pixEn, glyphX, pixelRow, hCount, vCount, rgb);
+module vgaBitgen(bright, pixelData, hCount, vCount, rgb, x, y);
 
-input bright, pixEn;
-input [7:0] bgColor, pixelRow;
-input [2:0] glyphX, pixelData;
+input bright;
+input [2:0] pixelData;
 input [9:0] hCount, vCount;
-//input [15:0] x, y;
+input wire[15:0] x, y;
 
 output reg [7:0] rgb;
 
-wire pixel = pixelRow[7 - glyphX];
 
 parameter black = 8'b0000_0000;
 parameter blue = 8'b0000_0011, green = 8'b0001_1100, cyan = 8'b0001_1111, red = 8'b1110_0000, magenta = 8'b1110_0011, yellow = 8'b1111_1100;
 parameter white = 8'b1111_1111;
 
 always @(*) begin
-	if(~bright || ~pixEn)
+	if(~bright)
 		rgb = black;
 	else begin
 	
@@ -43,9 +41,9 @@ always @(*) begin
 	  rgb = black;
 
 		// draw the red square centered at (x,y) with +/-5 pixel radius
-	   if ((hCount >= 300 - 2) && (hCount <= 300 + 2) &&
-			  (vCount >= 300 - 2) && (vCount <= 300 + 2)) begin
-			 rgb = cyan;
+	   if ((hCount >= x - 2) && (hCount <= x + 2) &&
+			  (vCount >= y - 2) && (vCount <= y + 2)) begin
+			 rgb = white;
 	   end
 		else begin
 			case (pixelData)
@@ -208,10 +206,6 @@ always @(*) begin
 					end
 					else
 						rgb = black;
-				end
-				
-				3'b100: begin
-					rgb = pixel ? 8'hFF : bgColor;
 				end
 					
 				default rgb = black;

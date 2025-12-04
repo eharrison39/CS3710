@@ -15,14 +15,14 @@
 
 
 module pcReg(in, pcEn, reset, clk, out);
-input [9:0] in;
+input [15:0] in;
 input pcEn, reset, clk;
-output reg [9:0] out;
+output reg [15:0] out;
 
 always @ (posedge clk)
 begin
 	if(~reset)
-		out <= 10'b0000000000;
+		out <= 16'h0000;
 	else
 	begin
 		if(pcEn)

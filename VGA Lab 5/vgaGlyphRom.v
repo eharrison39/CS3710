@@ -25,7 +25,7 @@ input [13:0]address;
 
 output reg [7:0] q;
 
-reg [7:0] rom [0:16383];
+reg [7:0] rom [0:65536];
 
 initial begin
     $readmemh("font8x8.hex", rom);

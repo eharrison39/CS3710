@@ -1,7 +1,7 @@
 module vgaBitgenMem(
     input clk,
     input bright,
-	 input [2:0] pixelData,
+	input [2:0] pixelData,
     input [9:0] hCount, vCount,
     output reg [2:0] rgb
 );

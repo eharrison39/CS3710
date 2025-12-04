@@ -41,9 +41,9 @@ always @(*) begin
 	  rgb = black;
 
 		// draw the red square centered at (x,y) with +/-5 pixel radius
-	   if ((hCount >= x - 5) && (hCount <= x + 5) &&
-			  (vCount >= y - 5) && (vCount <= y + 5)) begin
-			 rgb = cyan;
+	   if ((hCount >= x - 2) && (hCount <= x + 2) &&
+			  (vCount >= y - 2) && (vCount <= y + 2)) begin
+			 rgb = white;
 	   end
 		else begin
 			case (pixelData)

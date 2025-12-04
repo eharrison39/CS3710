@@ -1,7 +1,7 @@
 
 
 
-module topLevel #(parameter INIT_FILE = "memory_init.hex") 
+module topLevel #(parameter INIT_FILE = "output.hex") 
 (clk, SNES_DATA_IN, SNES_CLOCK_OUT, SNES_LATCH_OUT, hSync, vSync, rgb, bright, vga_clk, segr15a, segr15b, segr15c, segr15d);
 
 input wire clk;
@@ -18,11 +18,11 @@ output wire [6:0] segr15a, segr15b, segr15c, segr15d;
 wire [15:0] snesData;
 wire rst;
 wire memAEn, memBEn;
-wire [9:0] addrB;
+wire [15:0] addrB;
 wire [15:0] memOutA, memOutB;
 
 wire [15:0] srcMuxOut, r0, r1, r2, r15;
-wire [9:0] address;
+wire [15:0] address;
 
 
 SNES controller( .clk(clk), .snes_data(SNES_DATA_IN), .snes_clock(SNES_CLOCK_OUT),
@@ -50,7 +50,7 @@ vgaController ctrl (.clk(clk), .rst(rst), .countEn(vga_clk), .hSync(hSync), .vSy
 														.bright(bright), .hCount(hCount), .vCount(vCount));
 									
 //vgaBitgenMem bitgen (.clk(clk), .pixelData(swc), .bright(bright), .hCount(hCount), .vCount(vCount), .rgb(rgb_base));
-vgaBitgen bitgen (.pixelData(r2[2:0]), .bright(bright), .hCount(hCount), .vCount(vCount), .rgb(rgb_base), .x(r0), .y(r1));
+vgaBitgen bitgen (.pixelData(r2[2:0]), .bright(bright), .hCount(hCount), .vCount(vCount), .rgb(rgb_base), .x(r1), .y(r0));
 
 bcd_to_sev_seg bcdAlu1(r15[3:0], segr15a);
 bcd_to_sev_seg bcdAlu2(r15[7:4], segr15b);

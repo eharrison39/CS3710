@@ -35,7 +35,7 @@ reg[7:0] display;
 
 
 // Control outputs from fsm
- wire [15:0] regEn;
+wire [15:0] regEn;
 wire [3:0] destMuxCtrl, srcMuxCtrl;
 wire lsCtrl; 
 wire [1:0] pcMuxCtrl, aluMuxCtrl;
