@@ -41,8 +41,8 @@ always @(*) begin
 	  rgb = black;
 
 		// draw the red square centered at (x,y) with +/-5 pixel radius
-	   if ((hCount >= x - 2) && (hCount <= x + 2) &&
-			  (vCount >= y - 2) && (vCount <= y + 2)) begin
+	   if ((hCount >= x - 4) && (hCount <= x + 4) &&
+			  (vCount >= y - 4) && (vCount <= y + 4)) begin
 			 rgb = white;
 	   end
 		else begin
@@ -177,7 +177,7 @@ always @(*) begin
 						rgb = cyan;
 					end
 					else if (((hCount >= 585) && (hCount <= 600)) &&
-								((vCount >= 180) && (vCount <= 300))) begin
+								((vCount >= 170) && (vCount <= 300))) begin
 						rgb = cyan;
 					end
 					else if (((hCount >= 390) && (hCount <= 585)) &&
@@ -188,27 +188,201 @@ always @(*) begin
 								((vCount >= 200) && (vCount <= 290))) begin
 						rgb = cyan;
 					end
-					else if (((hCount >= 395) && (hCount <= 500)) &&
+					else if (((hCount >= 395) && (hCount <= 505)) &&
 								((vCount >= 200) && (vCount <= 205))) begin
 						rgb = cyan;
 					end
-					else if (((hCount >= 495) && (hCount <= 500)) &&
-								((vCount >= 205) && (vCount <= 270))) begin
+					else if (((hCount >= 495) && (hCount <= 505)) &&
+								((vCount >= 205) && (vCount <= 275))) begin
 						rgb = cyan;
 					end
-					else if (((hCount >= 500) && (hCount <= 540)) &&
-								((vCount >= 267) && (vCount <= 270))) begin
+					else if (((hCount >= 505) && (hCount <= 540)) &&
+								((vCount >= 272) && (vCount <= 275))) begin
 						rgb = cyan;
 					end
 					else if (((hCount >= 540) && (hCount <= 560)) &&
-								((vCount >= 267) && (vCount <= 270))) begin
+								((vCount >= 272) && (vCount <= 275))) begin
 						rgb = magenta;
 					end
 					else
 						rgb = black;
 				end
+				
+				3'b100: begin
+				
+					// GHOST FACE
+					if((hCount >= 430) && (hCount <= 530) &&
+						((vCount >= 100) && (vCount <= 130))) begin
+							rgb = black;
+					end
 					
-				default rgb = black;
+					else if((hCount >= 410) && (hCount <= 430) &&
+						((vCount >= 100) && (vCount <= 140))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 390) && (hCount <= 410) &&
+						((vCount >= 110) && (vCount <= 140))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 370) && (hCount <= 390) &&
+						((vCount >= 120) && (vCount <= 160))) begin
+							rgb = black;
+					end
+					
+					// Very LEft block
+					else if((hCount >= 350) && (hCount <= 370) &&
+						((vCount >= 140) && (vCount <= 340))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 370) && (hCount <= 390) &&
+						((vCount >= 300) && (vCount <= 380))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 390) && (hCount <= 410) &&
+						((vCount >= 320) && (vCount <= 400))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 410) && (hCount <= 430) &&
+						((vCount >= 360) && (vCount <= 460))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 430) && (hCount <= 450) &&
+						((vCount >= 440) && (vCount <= 480))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 450) && (hCount <= 470) &&
+						((vCount >= 460) && (vCount <= 500))) begin
+							rgb = black;
+					end
+					
+					//VERY Bottom
+					else if((hCount >= 470) && (hCount <= 490) &&
+						((vCount >= 480) && (vCount <= 500))) begin
+							rgb = black;
+					end
+					
+					
+					else if((hCount >= 490) && (hCount <= 510) &&
+						((vCount >= 460) && (vCount <= 500))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 510) && (hCount <= 530) &&
+						((vCount >= 440) && (vCount <= 480))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 530) && (hCount <= 550) &&
+						((vCount >= 360) && (vCount <= 460))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 550) && (hCount <= 570) &&
+						((vCount >= 320) && (vCount <= 400))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 570) && (hCount <= 590) &&
+						((vCount >= 300) && (vCount <= 380))) begin
+							rgb = black;
+					end
+					
+					// Very RIGHT Side
+					else if((hCount >= 590) && (hCount <= 610) &&
+						((vCount >= 140) && (vCount <= 340))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 570) && (hCount <= 590) &&
+						((vCount >= 120) && (vCount <= 160))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 550) && (hCount <= 570) &&
+						((vCount >= 110) && (vCount <= 140))) begin
+							rgb = black;
+					end
+					
+					else if((hCount >= 530) && (hCount <= 550) &&
+						((vCount >= 100) && (vCount <= 140))) begin
+							rgb = black;
+					end
+					
+					// Full LONG FACE BOUNDARY IS COMPLETE
+					
+					
+					// LEFT EYE
+					else if (((hCount >= 390) && (hCount <= 410)) &&
+								((vCount >= 260) && (vCount <= 280))) begin
+						rgb = black;
+					end
+					
+					else if (((hCount >= 410) && (hCount <= 430)) &&
+								((vCount >= 240) && (vCount <= 280))) begin
+						rgb = black;
+					end
+					
+					else if (((hCount >= 430) && (hCount <= 450)) &&
+								((vCount >= 220) && (vCount <= 280))) begin
+						rgb = black;
+					end
+					
+					else if (((hCount >= 450) && (hCount <= 470)) &&
+								((vCount >= 200) && (vCount <= 260))) begin
+						rgb = black;
+					end
+					
+					// RIGHT EYE
+					else if (((hCount >= 490) && (hCount <= 510)) &&
+								((vCount >= 200) && (vCount <= 260))) begin
+						rgb = black;
+					end
+					
+					else if (((hCount >= 510) && (hCount <= 530)) &&
+								((vCount >= 220) && (vCount <= 280))) begin
+						rgb = black;
+					end
+					
+					else if (((hCount >= 530) && (hCount <= 550)) &&
+								((vCount >= 240) && (vCount <= 280))) begin
+						rgb = black;
+					end
+					
+					else if (((hCount >= 550) && (hCount <= 570)) &&
+								((vCount >= 260) && (vCount <= 280))) begin
+						rgb = black;
+					end
+					
+					else if (((hCount >= 470) && (hCount <= 490)) &&
+								((vCount >= 280) && (vCount <= 300))) begin
+						rgb = black;
+					end
+					
+					else if (((hCount >= 450) && (hCount <= 510)) &&
+								((vCount >= 320) && (vCount <= 420))) begin
+						rgb = black;
+					end
+					
+					else if (((hCount >= 470) && (hCount <= 490)) &&
+								((vCount >= 420) && (vCount <= 440))) begin
+						rgb = black;
+					end
+				
+					
+					
+					// 
+					else begin
+						  rgb = 8'hFF;   // BLACK
+					end
+				end
+				default : rgb = black;
 			endcase
 		end
 	end
