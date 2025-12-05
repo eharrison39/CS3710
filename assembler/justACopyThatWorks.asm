@@ -19,14 +19,14 @@ andi r9, 0
 
 // GAME RESET Addr7
 // Set initial values
-andi r0, 0  // x pos
-addi r0, 2  // x = 2
-lshi r0, 8  // x = 512
-addi r0, 88 // x = 600
-andi r1, 0  // y pos
-addi r1, 1  // y = 1
-lshi r1, 8  // y = 256
-addi r1, 184 // y = 440
+andi r1, 0  // x pos
+addi r1, 2  // x = 2
+lshi r1, 8  // x = 512
+addi r1, 88 // x = 600
+andi r0, 0  // y pos
+addi r0, 1  // y = 1
+lshi r0, 8  // y = 256
+addi r0, 184 // y = 440
 andi r2, 0  // maze level
 addi r2, 1
 
@@ -40,7 +40,7 @@ andi r5, 0  // Stor maze level
 cmpi r15, 0
 bne 3   // CHANGE
 andi r12, 0  // CHANGE
-beq -4  // Jump to BEGINNING LOOP
+beq -6  // Jump to BEGINNING LOOP
 
 // If maze == 1
 cmpi r2, 1
@@ -230,7 +230,7 @@ beq 4 // Jump to MAZE 1
     andi r6, 0    // r6 = 0
     addi r6, 2    // r6 = 2
     lshi r6, 8    // r6 = 512
-    addi r6, 118  // r6 = 620
+    addi r6, 108  // r6 = 620
     cmp r1, r6
     blt 19 // Jump to ELSE DEAD 1
 
@@ -247,16 +247,16 @@ beq 4 // Jump to MAZE 1
     // Won Level 1
     addi r2, 1  // Update Level
     // Update x for level 2
-    andi r0, 0   // x = 0
-    addi r0, 1   // x = 1
-    lshi r0, 8   // x = 256
-    addi r0, 94  // x = 350
+    andi r1, 0   // x = 0
+    addi r1, 1   // x = 1
+    lshi r1, 8   // x = 256
+    addi r1, 94  // x = 350
 
     // Update y for level 2
-    andi r1, 0   // y = 0
-    addi r1, 1   // y = 1
-    lshi r1, 8   // y = 256
-    addi r1, 204 // y = 460
+    andi r0, 0   // y = 0
+    addi r0, 1   // y = 1
+    lshi r0, 8   // y = 256
+    addi r0, 204 // y = 460
 
     cmpi r9, 0
     beq 9 // Jump to END IF ELSE 1
@@ -264,16 +264,16 @@ beq 4 // Jump to MAZE 1
     // ELSE DEAD 1 Addr177
     // else you die
     // Update x for level 1
-    andi r0, 0   // x = 0
-    addi r0, 2   // x = 2
-    lshi r0, 8   // x = 512
-    addi r0, 88  // x = 600
+    andi r1, 0   // x = 0
+    addi r1, 2   // x = 2
+    lshi r1, 8   // x = 512
+    addi r1, 88  // x = 600
 
     // Update y for level 1
-    andi r1, 0   // y = 0
-    addi r1, 1   // y = 1
-    lshi r1, 8   // y = 256
-    addi r1, 184 // y = 440
+    andi r0, 0   // y = 0
+    addi r0, 1   // y = 1
+    lshi r0, 8   // y = 256
+    addi r0, 184 // y = 440
 
     // END IF ELSE 1 Addr185
 // End Maze == 1
@@ -581,16 +581,16 @@ beq 6 // Jump to MAZE 2
     // Won Level 2
     addi r2, 1  // Update Level
     // Update x for level 3
-    andi r0, 0   // x = 0
-    addi r0, 1   // x = 1
-    lshi r0, 8   // x = 256
-    addi r0, 64  // x = 320
+    andi r1, 0   // x = 0
+    addi r1, 1   // x = 1
+    lshi r1, 8   // x = 256
+    addi r1, 64  // x = 320
 
     // Update y for level 3
-    andi r1, 0   // y = 0
-    addi r1, 1   // y = 1
-    lshi r1, 8   // y = 256
-    addi r1, 204 // y = 460
+    andi r0, 0   // y = 0
+    addi r0, 1   // y = 1
+    lshi r0, 8   // y = 256
+    addi r0, 204 // y = 460
 
     cmpi r9, 0
     beq 9 // Jump to END IF ELSE 2
@@ -598,16 +598,16 @@ beq 6 // Jump to MAZE 2
     // ELSE DEAD 2 Addr406
     // else you die reset x and y positions
     // Update x for level 2
-    andi r0, 0   // x = 0
-    addi r0, 1   // x = 1
-    lshi r0, 8   // x = 256
-    addi r0, 94  // x = 350
+    andi r1, 0   // x = 0
+    addi r1, 1   // x = 1
+    lshi r1, 8   // x = 256
+    addi r1, 94  // x = 350
 
     // Update y for level 2
-    andi r1, 0   // y = 0
-    addi r1, 1   // y = 1
-    lshi r1, 8   // y = 256
-    addi r1, 204 // y = 460
+    andi r0, 0   // y = 0
+    addi r0, 1   // y = 1
+    lshi r0, 8   // y = 256
+    addi r0, 204 // y = 460
     // END IF ELSE 2 Addr414
 // End Maze == 2
 // Jump to end of if else statement
@@ -756,7 +756,7 @@ beq 6 // Jump to MAZE 3
     andi r6, 0    // r6 = 0
     addi r6, 2    // r6 = 2
     lshi r6, 8    // r6 = 512
-    addi r6, 118  // r6 = 620
+    addi r6, 108  // r6 = 620
     cmp r1, r6
     blt 13 // Jump to ELSE IF 3.6
 
@@ -1036,16 +1036,16 @@ beq 6 // Jump to MAZE 3
     // ELSE DEAD 3 Addr715
     // else you die reset x and y positions
     // Update x for level 3
-    andi r0, 0   // x = 0
-    addi r0, 1   // x = 1
-    lshi r0, 8   // x = 256
-    addi r0, 64  // x = 320
+    andi r1, 0   // x = 0
+    addi r1, 1   // x = 1
+    lshi r1, 8   // x = 256
+    addi r1, 64  // x = 320
 
     // Update y for level 3
-    andi r1, 0   // y = 0
-    addi r1, 1   // y = 1
-    lshi r1, 8   // y = 256
-    addi r1, 204 // y = 460
+    andi r0, 0   // y = 0
+    addi r0, 1   // y = 1
+    lshi r0, 8   // y = 256
+    addi r0, 204 // y = 460
     // END IF ELSE 3 Addr723
 // End Maze == 3
 // Jump to end of if else statement
@@ -1071,7 +1071,7 @@ cmpi r14, 8
 bne 5 // Jump to CHECK DOWN
     cmpi r12, 0  // CHANGE
     bne 3        // CHANGE
-    subi r1, 1  // Move up by 1
+    subi r0, 10  // Move up by 10
     addi r12, 1  // Set state to 1 // CHANGE
 
 // CHECK DOWN Addr736
@@ -1083,7 +1083,7 @@ cmpi r14, 16
 bne 5 // Jump to CHECK LEFT
     cmpi r12, 0  // CHANGE
     bne 3        // CHANGE
-    addi r1, 1  // Move down by 1
+    addi r0, 10  // Move down by 10
     addi r12, 1  // Set state to 1 // CHANGE
 
 // CHECK LEFT Addr745
@@ -1095,7 +1095,7 @@ cmpi r14, 32
 bne 5 // Jump to CHECK RIGHT
     cmpi r12, 0  // CHANGE
     bne 3        // CHANGE
-    subi r0, 1  // Move left by 1
+    subi r1, 10  // Move left by 10
     addi r12, 1  // Set state to 1 // CHANGE
 
 // CHECK RIGHT Addr754
@@ -1107,7 +1107,7 @@ cmpi r14, 64
 bne 5 // Jump to CHECK RESET
     cmpi r12, 0  // CHANGE
     bne 3        // CHANGE
-    addi r0, 1  // Move right by 1
+    addi r1, 10  // Move right by 10
     addi r12, 1  // Set state to 1 // CHANGE
 
 // CHECK RESET Addr763
@@ -1116,23 +1116,26 @@ andi r14, 0
 addi r14, 1  // r14 = 1
 and r14, r15
 cmpi r14, 1
-bne 6  // Jump to END LOOP
+bne 9  // Jump to CHECK RESET 2
+    cmpi r12, 0  // CHANGE
+    bne 7        // CHANGE
+    addi r12, 1  // Set state to 1 // CHANGE
     andi r8, 0    // r8 = 0
     addi r8, 253  // r8 = 253
     lshi r8, 8    // r8 = -768
-    addi r8, 3   // r8 = -765
-    // Address = 7 a772 - 765 = 7
+    addi r8, 0   // r8 = -768
+    // Address = 7 a775 - 768 = 7
     jal r11, r8 // Jump to GAME RESET
 
-// END LOOP Addr773
+// END LOOP Addr776
 andi r8, 0    // r8 = 0
 addi r8, 253  // r8 = 253
 lshi r8, 8    // r8 = -768
-addi r8, 8   // r8 = -760
-// Address = 17 a777 - 760 = 17
+addi r8, 5   // r8 = -763
+// Address = 17 a780 - 763 = 17
 jal r11, r8  // Jump to BEGINNING LOOP
 
-// Addr778
+// Addr781
 
 // // beq address x
 // bne 4  // Jump to CONTINUE
