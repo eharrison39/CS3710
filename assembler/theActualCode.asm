@@ -979,7 +979,7 @@ beq 6 // Jump to MAZE 3
     beq 48 // Jump to END IF ELSE 3
 
     // ELSE IF 3.14 Addr676
-    // else if r1 >= 505 && r1 <= 540 && r0 >= 270 && r0 <= 275
+    // else if r1 >= 505 && r1 <= 540 && r0 >= 270 && r0 <= 275 // then show scary face
     andi r6, 0    // r6 = 0
     addi r6, 1    // r6 = 1
     lshi r6, 8    // r6 = 256
@@ -1002,7 +1002,7 @@ beq 6 // Jump to MAZE 3
     bgt 3 // Jump to ELSE IF 3.15
 
     cmpi r9, 0
-    beq 29 // Jump to END IF ELSE 3
+    beq 18 // Jump to WON LEVEL 3
 
     // ELSE IF 3.15 Addr695
     // else if r1 >= 540 && r1 <= 560 && r0 >= 270 && r0 <= 275 then You Win
@@ -1027,6 +1027,7 @@ beq 6 // Jump to MAZE 3
     cmp r0, r7
     bgt 4 // Jump to ELSE DEAD 3
 
+    // WON LEVEL 3
     // Won Level 3
     addi r2, 1  // Update Level
 
