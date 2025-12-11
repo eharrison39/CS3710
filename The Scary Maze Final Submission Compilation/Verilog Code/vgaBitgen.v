@@ -37,7 +37,7 @@ always @(*) begin
 		rgb = black;
 	else begin
 	
-	// default to black
+			  // default to black
 	  rgb = black;
 
 		// draw the red square centered at (x,y) with +/-5 pixel radius

@@ -54,6 +54,10 @@ wire [4:0] opc5;
 // FSM input
 wire [15:0] instruction;
 
+// Memory output and enables (fsm input)
+//wire [15:0] memOutA,
+//wire memAEn
+
 // Needed from  program counter
 wire [15:0] addrA;
 wire pcEn;
@@ -72,7 +76,11 @@ pcAdder pcInc (.k(k), .curAddr(pcAddr), .nextAddr(addrA));
 
 // Load Store ctrl
 addrMux addrMux(.rdest(destMuxOut), .pc(pcAddr), .ctrl(lsCtrl), .out(address));
-			  
+
+// Memory
+//dualPortRam #(.INIT_FILE(INIT_FILE)) ram(.we_a(memAEn), .we_b(memBEn), .clk(clk), .addr_a(address), .addr_b(addrB), 
+//						  .data_a(srcMuxOut), .data_b(aluBus), .q_a(memOutA), .q_b(memOutB));
+						  
 // Instruction Register
 (* preserve, keep *)register instructionReg(.in(memOutA), .regEn(ir), .reset(rst), .clk(clk), .out(instruction));
 

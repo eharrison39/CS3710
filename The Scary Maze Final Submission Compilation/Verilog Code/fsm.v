@@ -2,7 +2,7 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: 		Luke Jones, David Brown
+// Engineer: 		Luke Jones
 // 
 // Create Date:    11/4/2025
 // Design Name: 

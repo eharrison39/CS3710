@@ -24,12 +24,12 @@
 /* These next two lines are there so the compiler gives an acurrate register count. Instead of optimizing.*/ 
 //(* keep_hierarchy = "yes" *)
 //(* noprune = 1 *)
-module cpuFullDatapathTB(clk, rst, snesInput, memOutA, srcMuxOut, address, memAEn, r0, r1, r2, r14, r15, flags);
+module cpuFullDatapath (clk, rst, snesInput, memOutA, srcMuxOut, address, memAEn, r0, r1, r2, r15);
 
 input wire clk, rst;
 input wire [15:0] snesInput, memOutA;
 
-output wire [15:0] srcMuxOut, r0, r1, r2, r14, r15;
+output wire [15:0] srcMuxOut, r0, r1, r2, r15;
 output wire [15:0] address;  // Address after mux
 output wire memAEn;
 
@@ -42,17 +42,21 @@ wire fe, ri, ir;
 wire [15:0] imm;
 
 // Regfile Alu Datapath wire connections
-wire [15:0] r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13;
+wire [15:0] r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14;
 wire [15:0] aluOut;
 wire [15:0] aluBus;
 wire [15:0] destMuxOut, srcImmRegOut;
-output wire [4:0] flags;
+wire [4:0] flags;
 wire [4:0] aluFlags;
 wire [4:0] opc5;
 
 
 // FSM input
 wire [15:0] instruction;
+
+// Memory output and enables (fsm input)
+//wire [15:0] memOutA,
+//wire memAEn
 
 // Needed from  program counter
 wire [15:0] addrA;
@@ -72,7 +76,11 @@ pcAdder pcInc (.k(k), .curAddr(pcAddr), .nextAddr(addrA));
 
 // Load Store ctrl
 addrMux addrMux(.rdest(destMuxOut), .pc(pcAddr), .ctrl(lsCtrl), .out(address));
-			  
+
+// Memory
+//dualPortRam #(.INIT_FILE(INIT_FILE)) ram(.we_a(memAEn), .we_b(memBEn), .clk(clk), .addr_a(address), .addr_b(addrB), 
+//						  .data_a(srcMuxOut), .data_b(aluBus), .q_a(memOutA), .q_b(memOutB));
+						  
 // Instruction Register
 (* preserve, keep *)register instructionReg(.in(memOutA), .regEn(ir), .reset(rst), .clk(clk), .out(instruction));
 
